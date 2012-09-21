@@ -1,0 +1,61 @@
+html, body {
+	height:100%;
+}
+body {
+    text-align:center; /* Centralizar na horizontal no IE caso o site entre em Quirks mode */
+	background:white url('bgnoise.png') repeat;
+}
+#distance {
+    width:1px;
+    height:40%;
+    background-color:#fc6;
+    margin-bottom:-13.75em; /* Metade da altura do nosso box que ficará centralizado */
+    float:left;
+}
+#container {
+    margin:0 auto;
+    position:relative; /* Coloca o container frente ao elemento com o id distance */
+    text-align:left;
+    height:27.5em;
+    width:720px;
+    clear:left;
+    background-color:#eaeaea;
+    border:1px solid #cccccc;
+	padding: 10px;
+}
+#sender-container {
+	margin:0 auto;
+    position:relative; /* Coloca o container frente ao elemento com o id distance */
+    text-align:left;
+    height:20px;
+    width:45em;
+    clear:left;
+	margin-top: 20px;
+}
+#txt-sender {
+	width: 663px;
+	background-color:#eaeaea;
+    border:1px solid #cccccc;
+	height: 35px;
+	font-size: 18px;
+	padding-left: 5px;
+}
+#btn-sender {
+	height: 35px;
+	border: solid 1px #6eb2f9;
+	background-color: #6eb2f9;
+	color: #ffffff;
+	vertical-align: top;
+	cursor: pointer;
+}
+#btn-sender:active {
+	background-color: #4F80B3;
+}
+.rounded-15 {
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+}
+.rounded-5 {
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}

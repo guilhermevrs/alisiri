@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<brain>
+	<initial>Ola, como vai voce?</initial>
+	<final>Tchau, ate mais</final>
+	<quit>
+		<add text="Adeus"/>
+		<add text="Ate logo"/>
+	</quit>
+	<pre>
+		<add old="v1" new="v2"/>
+		<add old="v3" new="v4"/>
+	</pre>
+	<pos>
+		<add old="v1" new="v2"/>
+		<add old="v3" new="v4"/>
+	</pos>
+	<syn>
+		<add old="v1" new="v2"/>
+		<add old="v3" new="v4"/>
+	</syn>
+	<keys>
+		<add key="" decomp="" order="">
+			<reassemb text=""/>
+			<reassemb text=""/>
+		</add>
+		<add key="" decomp="" order="">
+			<reassemb text=""/>
+			<reassemb text=""/>
+		</add>
+	</keys>
+</brain>
