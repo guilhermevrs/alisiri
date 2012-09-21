@@ -1,7 +1,7 @@
 module("GUI");
-var x = 1;
-test( "should execute callback", function() {
+var x = "";
+test( "Should connect to database", function() {
   var siri = new Alisiri();
-  siri.connectToDatabase(function(){x=3});
-  equal( 3,x, "Precisa, agora, conectar na database via ajax e retornar o xml" );
+  siri.connectToDatabase(function(xml){x=xml});
+  ok( x.indexOf("<xml") != -1, "Teste funcionando" );
 });
