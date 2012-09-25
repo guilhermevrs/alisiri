@@ -21,7 +21,11 @@ function Alisiri()
 		});
 	},
 	
-	this.getInitialPhrase = function()  {
-		return "Ola, como vai voce?";
+	this.getInitialPhrase = function(data)  {
+		return $(data).find("initial").html();
+	}
+
+	this.getFinalPhrase = function(data)  {
+		return $(data).find("final").html();
 	}
 }
