@@ -12,7 +12,7 @@ function Alisiri()
 		  type: "GET",
 		  url: database_url,
 		  success: function(result){
-			if(typeof callback === 'function') callback.apply(this, [result.d]);
+			if(typeof callback === 'function') callback.call(this, result);
 		  },
 		  dataType: 'xml',
 		  error: function () {

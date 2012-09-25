@@ -1,11 +1,9 @@
 module("Backend");
 test( "Should connect to database", function() {
   var siri = new Alisiri();
-  var x = "sdsds";
   siri.connectToDatabase(function(data){
-	x = data;
+	console.log(data);
   });
-  console.log(x);
   ok( true, "Teste funcionando" );
 });
 
