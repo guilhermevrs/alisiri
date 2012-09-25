@@ -7,18 +7,21 @@ var database_url = "database.xml";
 //Classes
 function Alisiri()
 {
-	
 	this.connectToDatabase = function(callback) {
 		$.ajax({
 		  type: "GET",
 		  url: database_url,
-		  success: function(xml){
-			callback(xml);
+		  success: function(result){
+			if(typeof callback === 'function') callback.apply(this, [result.d]);
 		  },
 		  dataType: 'xml',
 		  error: function () {
 			alert("Ocorreu um erro inesperado durante o processamento.");
 		  }
 		});
+	},
+	
+	this.getInitialPhrase = function()  {
+		return "Ola, como vai voce?";
 	}
 }
