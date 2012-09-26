@@ -12,9 +12,9 @@ module("Backend", {
 
 test( "Should connect to database", function() {
   siri.connectToDatabase(function(data){
-	console.log(data.contentType);
+	console.log("XmlEncoding = " + data.xmlEncoding);
   });
-	ok( true, "Para verificar se o teste funcionou, checar no console se o contentType" );
+	ok( true, "Para verificar se o teste funcionou, checar no console se o xmlEncoding está retornando correto" );
 });
 
 test( "Should get initial phrase", function(){

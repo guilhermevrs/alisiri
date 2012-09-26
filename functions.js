@@ -31,6 +31,6 @@ function Alisiri()
 
 	this.CheckIfIsQuitPhrase = function(phrase, data) {
 		var t = $(data).find("quit").find('add[text="'+ phrase + '"]');
-		return t.context != "undefined";
+		return t.html() != undefined;
 	}
 }
