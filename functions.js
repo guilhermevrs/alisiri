@@ -54,7 +54,7 @@ function AlisiriGui()
 	}
 	
 	var self = this;
-	$("#btn-sender").off( "submit" ).on( "submit", function( event ) {
+	$("#btn-sender").off( "click" ).on( "click", function( event ) {
 		self.AddUserText(self.GetUserMessage());
 	});
 }
