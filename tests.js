@@ -94,7 +94,7 @@ var event,
   $button = $("#btn-sender"),
   divContainer = $("#container");
   // trigger event
-  event = $.Event( "submit" );
+  event = $.Event( "click" );
   $("#txt-sender").val("Mensagem do usuario");
   
   equal(divContainer.html(), "", "Container vazio antes do submit");
