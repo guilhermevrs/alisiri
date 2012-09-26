@@ -23,9 +23,14 @@ function Alisiri()
 	
 	this.getInitialPhrase = function(data)  {
 		return $(data).find("initial").html();
-	}
+	},
 
 	this.getFinalPhrase = function(data)  {
 		return $(data).find("final").html();
+	},
+
+	this.CheckIfIsQuitPhrase = function(phrase, data) {
+		var t = $(data).find("quit").find('add[text="'+ phrase + '"]');
+		return t.html() != undefined;
 	}
 }
