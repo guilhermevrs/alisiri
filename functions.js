@@ -33,4 +33,28 @@ function Alisiri()
 		var t = $(data).find("quit").find('add[text="'+ phrase + '"]');
 		return t.html() != undefined;
 	}
+};
+
+function AlisiriGui()
+{
+	this.AddText = function(text, cssClass){
+		$("#container").append('<div class="'+ cssClass +'">'+ text +'</div>')
+	}
+	
+	this.AddAlisiriText = function(text){
+		this.AddText(text,"alisiri-text");
+	}
+	
+	this.AddUserText = function(text){
+		this.AddText(text,"user-text");
+	}
+	
+	this.GetUserMessage = function(){
+		return $("#txt-sender").val();
+	}
+	
+	var self = this;
+	$("#btn-sender").off( "submit" ).on( "submit", function( event ) {
+		self.AddUserText(self.GetUserMessage());
+	});
 }
