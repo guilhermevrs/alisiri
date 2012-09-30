@@ -22,13 +22,13 @@ body {
     background-color:#eaeaea;
     border:1px solid #cccccc;
 	padding: 10px;
+	overflow: auto;
 }
 #sender-container {
-	margin:0 auto;
+	margin: 23%;
     position:relative; /* Coloca o container frente ao elemento com o id distance */
     text-align:left;
     height:20px;
-    width:45em;
     clear:left;
 	margin-top: 20px;
 }
@@ -50,6 +50,12 @@ body {
 }
 #btn-sender:active {
 	background-color: #4F80B3;
+}
+.user-text {
+	font-weight: bold;
+}
+.alisiri-text {
+	font-weight: italic;
 }
 .rounded-15 {
 	-moz-border-radius: 15px;

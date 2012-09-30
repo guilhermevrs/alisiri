@@ -52,9 +52,9 @@ function AlisiriGui()
 	this.GetUserMessage = function(){
 		return $("#txt-sender").val();
 	}
-	
 	var self = this;
 	$("#btn-sender").off( "click" ).on( "click", function( event ) {
 		self.AddUserText(self.GetUserMessage());
+		$("input:text").val("");
 	});
 }
