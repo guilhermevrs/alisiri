@@ -47,14 +47,19 @@ function AlisiriGui()
 	
 	this.AddUserText = function(text){
 		this.AddText(text,"user-text");
+		$("input:text").val("");
 	}
 	
 	this.GetUserMessage = function(){
 		return $("#txt-sender").val();
 	}
+	
 	var self = this;
+	$('input:text').keypress(function(e) {
+		if (((!e)?window.event.keyCode:e.which) == 13) 
+			self.AddUserText(self.GetUserMessage());
+	});
 	$("#btn-sender").off( "click" ).on( "click", function( event ) {
 		self.AddUserText(self.GetUserMessage());
-		$("input:text").val("");
 	});
 }
