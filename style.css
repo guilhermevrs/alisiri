@@ -25,15 +25,16 @@ body {
 	overflow: auto;
 }
 #sender-container {
-	margin: 23%;
+	margin:0 auto;
     position:relative; /* Coloca o container frente ao elemento com o id distance */
     text-align:left;
     height:20px;
+    width:45em;
     clear:left;
 	margin-top: 20px;
 }
 #txt-sender {
-	width: 663px;
+	width: 658px;
 	background-color:#eaeaea;
     border:1px solid #cccccc;
 	height: 35px;
