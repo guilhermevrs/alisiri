@@ -22,6 +22,7 @@ body {
     background-color:#eaeaea;
     border:1px solid #cccccc;
 	padding: 10px;
+	overflow: auto;
 }
 #sender-container {
 	margin:0 auto;
@@ -33,7 +34,7 @@ body {
 	margin-top: 20px;
 }
 #txt-sender {
-	width: 663px;
+	width: 658px;
 	background-color:#eaeaea;
     border:1px solid #cccccc;
 	height: 35px;
@@ -50,6 +51,12 @@ body {
 }
 #btn-sender:active {
 	background-color: #4F80B3;
+}
+.user-text {
+	font-weight: bold;
+}
+.alisiri-text {
+	font-weight: italic;
 }
 .rounded-15 {
 	-moz-border-radius: 15px;
