@@ -85,10 +85,10 @@ test( "Should verify if the decomp is valid or not", function(){
 
 test( "Should get the first right key, considering the decomp property", function(){
   var listKey = new Array();
-  listKey = siri.GetPossibleKeysWithDecomp("Isto é Chaves", '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Ola, como vai voce?</initial><final>Tchau, ate mais</final><keys><add key="Chaves" decomp="*" order="5"><reassemb text="r1"/><reassemb text="r2"/></add><add key="Chaves" decomp="* isto é *" order="9"><reassemb text="r3"/><reassemb text="r4"/></add><add key="madruga" decomp="*" order="1"><reassemb text="r5"/><reassemb text="r6"/></add></keys></brain>');
+  listKey = siri.GetPossibleKeysWithDecomp("Isto e Chaves", '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Ola, como vai voce?</initial><final>Tchau, ate mais</final><keys><add key="Chaves" decomp="*" order="5"><reassemb text="r1"/><reassemb text="r2"/></add><add key="Chaves" decomp="* isto e *" order="9"><reassemb text="r3"/><reassemb text="r4"/></add><add key="madruga" decomp="*" order="1"><reassemb text="r5"/><reassemb text="r6"/></add></keys></brain>');
   equal("chaves",listKey.key, "Returns the right key");
   equal(9,listKey.order, "returns the right order");
-  equal("* isto é *",listKey.decomp, "returns the right decomp");
+  equal("* isto e *",listKey.decomp, "returns the right decomp");
 });
 
 //************************************MODULE GUI

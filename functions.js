@@ -5,22 +5,6 @@ $(document).ready(function(){
 //Constantes
 var database_url = "database.xml";
 
-//Globais
-function retira_acentos(palavra) {
-    com_acento = 'áàãâäéèêëíìîïóòõôöúùûüçÁÀÃÂÄÉÈÊËÍÌÎÏÓÒÕÖÔÚÙÛÜÇ';
-    sem_acento = 'aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC';
-    nova='';
-    for(i=0;i<palavra.length;i++) {
-      if (com_acento.search(palavra.substr(i,1))>=0) {
-      nova+=sem_acento.substr(com_acento.search(palavra.substr(i,1)),1);
-      }
-      else {
-       nova+=palavra.substr(i,1);
-      }
-    }
-    return nova;
-}
-
 //Classes
 function Alisiri()
 {
@@ -53,7 +37,6 @@ function Alisiri()
 	
 	this.GetPossibleKeys = function(phrase, data){
 		var keys = new Array();
-		phrase = retira_acentos(phrase);
 		var minPhrase = phrase.toLowerCase();
 		$(data).find("keys").find("add").each(function(index, el){
 			var xmlEl = $(el);
@@ -131,7 +114,6 @@ function Alisiri()
 	},
 	
 	this.GetPossibleKeysWithDecomp = function(phrase, data){
-		phrase = retira_acentos(phrase);
 		var possibleKeys = this.GetPossibleKeys(phrase, data);
 		for (i=0; i<possibleKeys.length; i++)
 		{
