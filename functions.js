@@ -172,7 +172,7 @@ function AlisiriGui()
 	
 	this.AddUserText = function(text){
 		this.AddText(text,"user-text");
-		$("input:text").val("");
+		$("#txt-sender").val("");
 	}
 	
 	this.GetUserMessage = function(){
@@ -180,11 +180,12 @@ function AlisiriGui()
 	}
 	
 	var self = this;
-	$('input:text').keypress(function(e) {
-		if (((!e)?window.event.keyCode:e.which) == 13) 
+	$('#txt-sender').keypress(function(e) {
+		if ((((!e)?window.event.keyCode:e.which) == 13) && ($.trim($("#txt-sender").val()) != ""))
 			self.AddUserText(self.GetUserMessage());
 	});
 	$("#btn-sender").off( "click" ).on( "click", function( event ) {
-		self.AddUserText(self.GetUserMessage());
+		if ($.trim($("#txt-sender").val()) != "")
+			self.AddUserText(self.GetUserMessage());
 	});
 }
