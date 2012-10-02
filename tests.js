@@ -25,7 +25,7 @@ test( "Should get initial phrase", function(){
 
 test( "Should get undefined as initial phrase, when it is not in the database", function(){
   var ini = siri.getInitialPhrase('<?xml version="1.0" encoding="UTF-8"?><brain><final>Tchau, ate mais</final>');
-  equal(ini, undefined, "Teste funcionando");
+  equal(ini, "", "Teste funcionando");
 });
 
 test( "Should get final phrase", function(){
@@ -35,7 +35,7 @@ test( "Should get final phrase", function(){
 
 test( "Should get undefined as final phrase, when it is not in the database", function(){
   var ini = siri.getFinalPhrase('<?xml version="1.0" encoding="UTF-8"?><brain><initial>Hello</initial>');
-  equal(ini, undefined, "Teste funcionando");
+  equal(ini, "", "Teste funcionando");
 });
 
 test( "Should see that the phrase is in the quit list", function(){

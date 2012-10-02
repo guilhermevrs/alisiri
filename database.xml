@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <brain>
-	<initial>Ola, como vai voce?</initial>
+	<initial>Olá, como vai você?</initial>
 	<final>Tchau, ate mais</final>
 	<quit>
 		<add text="Adeus"/>

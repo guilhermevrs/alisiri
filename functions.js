@@ -23,11 +23,11 @@ function Alisiri()
 	},
 	
 	this.getInitialPhrase = function(data)  {
-		return $(data).find("initial").html();
+		return $(data).find("initial").text();	
 	},
 
 	this.getFinalPhrase = function(data)  {
-		return $(data).find("final").html();
+		return $(data).find("final").text();
 	},
 
 	this.CheckIfIsQuitPhrase = function(phrase, data) {
@@ -174,6 +174,7 @@ function AlisiriGui()
 			var self = this;
 			this.AddUserText(userInput);
 			siri.connectToDatabase(function(data){
+				//data = $.parseXML(data);
 				if(self.FirstTime) {
 					self.AddAlisiriText(siri.getInitialPhrase(data));
 					self.FirstTime = false;
