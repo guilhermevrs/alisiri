@@ -158,11 +158,16 @@ function ReassembElement()
 function AlisiriGui()
 {
 	this.AddText = function(text, cssClass){
-		$("#container").append('<div class="'+ cssClass +'">'+ text +'</div>')
+		$("#container").append('<div class="'+ cssClass +'">'+ text +'</div>');
+		this.ScrollContainer();
 	}
 	
 	this.AddAlisiriText = function(text){
 		this.AddText(text,"alisiri-text");
+	}
+	
+	this.ScrollContainer = function(){
+		container.scrollTop = container.scrollHeight;
 	}
 	
 	this.AddUserText = function(text){
