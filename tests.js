@@ -145,3 +145,12 @@ var event,
   $button.trigger( event );
   equal(divContainer.html(), '<div class="user-text">Mensagem do usuario</div>', "Container com mensagem da alisiri depois do submit");	
 });
+
+test( "Should print a default message if no key was selected", function(){
+  var listKey = new Array();
+  divContainer = $("#container");
+  equal(divContainer.html(), "", "Container vazio antes do submit");
+  listKey = siri.GetPossibleKeysWithDecomp("gosantos", '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Ola, como vai voce?</initial><final>Tchau, ate mais</final><keys><add key="Chaves" decomp="*" order="5"><reassemb text="r1"/><reassemb text="r2"/></add><add key="Chaves" decomp="* isto e *" order="9"><reassemb text="r3"/><reassemb text="r4"/></add><add key="madruga" decomp="*" order="1"><reassemb text="r5"/><reassemb text="r6"/></add></keys></brain>');
+  equal(null, listKey, "No key should return");
+  equal(divContainer.html(), '<div class="alisiri-text">' + siriGui.DefaultMessage + '</div>', "Container com mensagem da alisiri depois do submit");	
+});

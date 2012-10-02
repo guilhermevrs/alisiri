@@ -120,6 +120,9 @@ function Alisiri()
 			if(this.VerifyDecomp(phrase, possibleKeys[i].decomp))
 				return possibleKeys[i];
 		}
+		var gui = new AlisiriGui();
+		gui.AddAlisiriText(gui.DefaultMessage);
+		gui = null;
 		return null;
 	}
 };
@@ -139,6 +142,10 @@ function ReassembElement()
 
 function AlisiriGui()
 {
+	this.FirstTime = true;
+
+	this.DefaultMessage = "Desculpe, não entendi";
+
 	this.AddText = function(text, cssClass){
 		$("#container").append('<div class="'+ cssClass +'">'+ text +'</div>');
 		this.ScrollContainer();
@@ -160,14 +167,28 @@ function AlisiriGui()
 	this.GetUserMessage = function(){
 		return $("#txt-sender").val();
 	}
+
+	this.ProcessUserInput = function(){
+		if ($.trim($("#txt-sender").val()) != ""){
+			var userInput = this.GetUserMessage();
+			var self = this;
+			this.AddUserText(userInput);
+			siri.connectToDatabase(function(data){
+				if(self.FirstTime) {
+					self.AddAlisiriText(siri.getInitialPhrase(data));
+					self.FirstTime = false;
+				}
+			});
+		}
+	}
 	
 	var self = this;
-	$('#txt-sender').keypress(function(e) {
-		if ((((!e)?window.event.keyCode:e.which) == 13) && ($.trim($("#txt-sender").val()) != ""))
-			self.AddUserText(self.GetUserMessage());
+	$('#txt-sender').keypress(function(event) {
+		if (event.which == 13)
+			self.ProcessUserInput();
+			
 	});
 	$("#btn-sender").off( "click" ).on( "click", function( event ) {
-		if ($.trim($("#txt-sender").val()) != "")
-			self.AddUserText(self.GetUserMessage());
+		self.ProcessUserInput();
 	});
 }
