@@ -91,6 +91,24 @@ test( "Should get the first right key, considering the decomp property", functio
   equal("* isto e *",listKey.decomp, "returns the right decomp");
 });
 
+test( "Should get a reassemb", function(){
+  var key = new KeyElement();
+  var r1 = new ReassembElement();
+  var r2 = new ReassembElement();
+  var r3 = new ReassembElement();
+
+  r1.text = "Reassemb 1";
+  r2.text = "Mais um reassemb";
+  r3.text = "E outro reassemb";
+
+  key.reassemb.push(r1);
+  key.reassemb.push(r2);
+  key.reassemb.push(r3);
+
+  var resp = siri.GetRandomReassemb(key);
+  ok(resp != null, "Should not be null");
+});
+
 //************************************MODULE GUI
 module("GUI", {
   setup: function() {

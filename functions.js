@@ -76,13 +76,13 @@ function Alisiri()
 			{
 				if(splitDecomp[splitDecomp.length-1] == "*")
 				{
-					str+="\\b";
+					str+="\\b ";
 					for(i=1;i<splitDecomp.length-1;i++){
 						str+=splitDecomp[i];
 						if(i<splitDecomp.length-2)
 							str+=" ";
 					}
-					str+="\\b";
+					str+=" \\b";
 				}
 				else
 				{
@@ -91,12 +91,12 @@ function Alisiri()
 						if(i<splitDecomp.length-1)
 							str+=" ";
 					}
-					str+="$";
+					str+=" $";
 				}
 			}
 			else if(splitDecomp[splitDecomp.length-1] == "*")
 			{
-				str+="^";
+				str+="^ ";
 				for(i=0;i<splitDecomp.length-1;i++){
 					str+=splitDecomp[i];
 					if(i<splitDecomp.length-2)
@@ -124,20 +124,25 @@ function Alisiri()
 		gui.AddAlisiriText(gui.DefaultMessage);
 		gui = null;
 		return null;
+	},
+
+	this.GetRandomReassemb = function(key){
+		var index = Math.floor((Math.random()*key.reassemb.length)+0);
+		return key.reassemb[index];
 	}
 };
 
 function KeyElement()
 {
-	var order;
-	var key;
-	var decomp;
-	var reassemb = new Array();
+	this.order;
+	this.key;
+	this.decomp;
+	this.reassemb = new Array();
 };
 
 function ReassembElement()
 {
-	var text;
+	this.text="";
 }
 
 function AlisiriGui()
@@ -174,10 +179,15 @@ function AlisiriGui()
 			var self = this;
 			this.AddUserText(userInput);
 			siri.connectToDatabase(function(data){
-				//data = $.parseXML(data);
 				if(self.FirstTime) {
 					self.AddAlisiriText(siri.getInitialPhrase(data));
 					self.FirstTime = false;
+				}
+				var listKey = siri.GetPossibleKeysWithDecomp(userInput, data);
+				if(listKey != null)
+				{
+					var reassemb = siri.GetRandomReassemb(listKey);
+					self.AddAlisiriText(reassemb.text);
 				}
 			});
 		}

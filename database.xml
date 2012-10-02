@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <brain>
-	<initial>Olá, como vai você?</initial>
+	<initial>Sou galo</initial>
 	<final>Tchau, ate mais</final>
 	<quit>
 		<add text="Adeus"/>
 		<add text="Ate logo"/>
 	</quit>
 	<pre>
-		<add old="v1" new="v2"/>
+		<add old="vc" new="voce"/>
 		<add old="v3" new="v4"/>
 	</pre>
 	<pos>
@@ -19,13 +19,10 @@
 		<add old="v3" new="v4"/>
 	</syn>
 	<keys>
-		<add key="" decomp="" order="">
-			<reassemb text=""/>
-			<reassemb text=""/>
-		</add>
-		<add key="" decomp="" order="">
-			<reassemb text=""/>
-			<reassemb text=""/>
+		<add key="Ola" decomp="*" order="1">
+			<reassemb text="Como vai você?"/>
+			<reassemb text="Guilherme gato"/>
+			<reassemb text="Olá marilene"/>
 		</add>
 	</keys>
 </brain>
