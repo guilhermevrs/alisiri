@@ -163,10 +163,9 @@
         var audio = new Audio();
         audio.src = self.url(txt, lang);
         audio.play();
-
-        cb();
+		
       } catch (e) {
-        return cb(e);
+			//
       }
     };
   }
