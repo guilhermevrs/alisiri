@@ -4,6 +4,7 @@ $(document).ready(function(){
 
 //Constantes
 var database_url = "database.xml";
+var speech = new GoogleTTS('pt');
 
 //Classes
 function Alisiri()
@@ -158,6 +159,7 @@ function AlisiriGui()
 	
 	this.AddAlisiriText = function(text){
 		this.AddText(text,"alisiri-text");
+		this.Speak(text);
 	}
 	
 	this.ScrollContainer = function(){
@@ -191,6 +193,10 @@ function AlisiriGui()
 				}
 			});
 		}
+	}
+	
+	this.Speak = function(text){
+	speech.play(encodeURIComponent(text), 'pt');
 	}
 	
 	var self = this;
