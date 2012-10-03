@@ -141,39 +141,54 @@ test("Should replace preprocessing keys", function(){
 });
 
 test("Should preprocess user input", function(){
-  var result = siri.PreProcess("Entrada do usuario vc. Q mallandro", '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Sou galo</initial><final>Tchau, ate mais</final><pre><add old="vc" new="voce"/><add old="q" new="que"/></pre></brain>');
-  equal(result , "entrada do usuario voce. que mallandro", "Normalizes phrase and replaces preprocessing keys sucessfully");
+  var result = siri.PreProcess("Entrada do usuario vc. Q mallandro da casa", '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Sou galo</initial><final>Tchau, ate mais</final><pre><add old="vc" new="voce"/><add old="q" new="que"/></pre><syns><add syn="@casa" matches="casa barraco ape moradia"/></syns></brain>');
+  equal(result , "entrada do usuario voce. que mallandro da @casa", "Normalizes phrase and replaces preprocessing keys sucessfully");
   
-  result = siri.PreProcess(siriGui.DefaultMessage, '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Sou galo</initial><final>Tchau, ate mais</final><pre><add old="vc" new="voce"/><add old="q" new="que"/></pre></brain>');
+  result = siri.PreProcess(siriGui.DefaultMessage, '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Sou galo</initial><final>Tchau, ate mais</final><pre><add old="vc" new="voce"/><add old="q" new="que"/></pre><syns><add syn="@casa" matches="casa barraco ape moradia"/></syns></brain>');
   equal(result , "desculpe, nao entendi a ultima coisa que voce disse", "Normalizes phrase and replaces preprocessing keys sucessfully");
 });
 
-test("Should add spaces before ponctuation", function(){
-  var result = addSpacesToPonctuation("ola, ritmo de festa!");
+test("Should add spaces before punctuation", function(){
+  var result = addSpacesToPunctuation("ola, ritmo de festa!");
   equal(result , "ola , ritmo de festa !", "Adds spaces succesfully");
   
-  result = addSpacesToPonctuation("a");
+  result = addSpacesToPunctuation("a");
   equal(result , "a", "Adds spaces succesfully");
   
-  result = addSpacesToPonctuation("?");
+  result = addSpacesToPunctuation("?");
   equal(result , " ?", "Adds spaces succesfully");
   
-  result = addSpacesToPonctuation("a?");
+  result = addSpacesToPunctuation("a?");
   equal(result , "a ?", "Adds spaces sucessfully");
 });
 
-test("Should remove spaces before ponctuation", function(){
-  var result = removeSpacesFromPonctuation("ola , ritmo de festa !");
+test("Should remove spaces before punctuation", function(){
+  var result = removeSpacesFromPunctuation("ola , ritmo de festa !");
   equal(result , "ola, ritmo de festa!", "Removes spaces succesfully");
   
-  result = removeSpacesFromPonctuation("a");
+  result = removeSpacesFromPunctuation("a");
   equal(result , "a", "Removes spaces succesfully");
   
-  result = removeSpacesFromPonctuation(" ?");
+  result = removeSpacesFromPunctuation(" ?");
   equal(result , "?", "Removes spaces succesfully");
   
-  result = removeSpacesFromPonctuation("a ?");
+  result = removeSpacesFromPunctuation("a ?");
   equal(result , "a?", "Removes spaces sucessfully");
+});
+
+test("Should replace synonyms", function(){
+  var result = siri.ReplaceSynonyms("ae, casa dos manos!", '<?xml version="1.0" encoding="UTF-8"?><brain><syns><add syn="@casa" matches="casa barraco ape moradia"/></syns></brain>');
+  equal(result , "ae, @casa dos manos!", "Replaces synonyms sucessfully");
+  
+  var result = siri.ReplaceSynonyms("ae, barraco dos manos!", '<?xml version="1.0" encoding="UTF-8"?><brain><syns><add syn="@casa" matches="casa barraco ape moradia"/></syns></brain>');
+  equal(result , "ae, @casa dos manos!", "Replaces synonyms sucessfully");
+  
+  var result = siri.ReplaceSynonyms("ae, estou em casa", '<?xml version="1.0" encoding="UTF-8"?><brain><syns><add syn="@casa" matches="casa barraco ape moradia"/></syns></brain>');
+  equal(result , "ae, estou em @casa", "Replaces synonyms sucessfully");
+  
+  var result = siri.ReplaceSynonyms("ape casa ape ape moradia ape ape barraco barraco", '<?xml version="1.0" encoding="UTF-8"?><brain><syns><add syn="@casa" matches="casa barraco ape moradia"/></syns></brain>');
+  equal(result , "@casa @casa @casa @casa @casa @casa @casa @casa @casa", "Replaces synonyms sucessfully");
+  
 });
 
 //************************************MODULE GUI
