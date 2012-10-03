@@ -39,7 +39,7 @@ function RecursiveRegEx(array, init)
 	return str;
 }
 
-function retira_acentos(text) {
+function removeAccents(text) {
 text = text.replace(new RegExp('[ÁÀÂÃ]','gi'), 'a');
 text = text.replace(new RegExp('[ÉÈÊ]','gi'), 'e');
 text = text.replace(new RegExp('[ÍÌÎ]','gi'), 'i');
@@ -48,6 +48,28 @@ text = text.replace(new RegExp('[ÚÙÛ]','gi'), 'u');
 text = text.replace(new RegExp('[Ç]','gi'), 'c');
 return text;
 }
+// \ . , - \/ # ! $ % \^ & \* ; : { } = \- _ ` ~ ( ) //Should I add em all?
+function addSpacesToPonctuation(text)
+{
+	text = text.replace(new RegExp('[,]','gi'), ' ,');
+	text = text.replace(new RegExp('[.]','gi'), ' .');
+	text = text.replace(new RegExp('[!]','gi'), ' !');
+	text = text.replace(new RegExp('[?]','gi'), ' ?');
+	text = text.replace(new RegExp('[;]','gi'), ' ;');
+	text = text.replace(new RegExp('[:]','gi'), ' :');
+	return text;
+}
+function removeSpacesFromPonctuation(text)
+{
+	text = text.replace(new RegExp(' ,','gi'), ',');
+	text = text.replace(new RegExp(' \\.','gi'), '.');
+	text = text.replace(new RegExp(' !','gi'), '!');
+	text = text.replace(new RegExp(' \\?','gi'), '?');
+	text = text.replace(new RegExp(' ;','gi'), ';');
+	text = text.replace(new RegExp(' :','gi'), ':');
+	return text;
+}
+
 //***************Fim de funções globais***********
 
 //********************Classes*********************
@@ -197,6 +219,29 @@ function Alisiri()
 		var index = Math.floor((Math.random()*key.reassemb.length)+0);
 		return key.reassemb[index];
 	}
+	
+	this.PreReplace = function(userInput, data){
+		userInput = addSpacesToPonctuation(userInput);
+		$(data).find("pre").find("add").each(function(index, el){
+			var xmlEl = $(el);
+			var oldValue = xmlEl.attr("old").toLowerCase();
+			var newValue = xmlEl.attr("new").toLowerCase();
+			
+			userInput = userInput.replace(new RegExp('\\s' + oldValue + '\\s','gi'), ' ' + newValue + ' ');
+			userInput = userInput.replace(new RegExp('^' + oldValue + '\\s','gi'), newValue + ' ');
+			userInput = userInput.replace(new RegExp('\\s' + oldValue + '$','gi'), ' ' + newValue);
+		});
+		userInput = removeSpacesFromPonctuation(userInput);
+		return userInput;
+		}
+		
+	this.PreProcess = function(userInput, data){
+		userInput = removeAccents(userInput);
+		userInput = userInput.toLowerCase();
+		userInput = this.PreReplace(userInput, data);
+		return userInput;
+	}
+	
 };
 
 function KeyElement()
