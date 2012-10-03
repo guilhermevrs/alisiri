@@ -1,11 +1,13 @@
+//*******************Constantes*******************
+var database_url = "database.xml";
+var is_chrome = $.browser.webkit && !!window.chrome;
+var is_safari = $.browser.webkit && !window.chrome;
+//*****************Fim de constantes**************
+
+
 $(document).ready(function(){
 	$('#txt-sender').focus();
 });
-
-//*******************Constantes*******************
-var database_url = "database.xml";
-var speech = new GoogleTTS('pt');
-//*****************Fim de constantes**************
 
 //*****************Funções globais****************
 function RecursiveRegEx(array, init)
@@ -38,6 +40,38 @@ function RecursiveRegEx(array, init)
 	}
 	return str;
 }
+
+function removeAccents(text) {
+text = text.replace(new RegExp('[ÁÀÂÃ]','gi'), 'a');
+text = text.replace(new RegExp('[ÉÈÊ]','gi'), 'e');
+text = text.replace(new RegExp('[ÍÌÎ]','gi'), 'i');
+text = text.replace(new RegExp('[ÓÒÔÕ]','gi'), 'o');
+text = text.replace(new RegExp('[ÚÙÛ]','gi'), 'u');
+text = text.replace(new RegExp('[Ç]','gi'), 'c');
+return text;
+}
+// \ . , - \/ # ! $ % \^ & \* ; : { } = \- _ ` ~ ( ) //Should I add em all?
+function addSpacesToPonctuation(text)
+{
+	text = text.replace(new RegExp('[,]','gi'), ' ,');
+	text = text.replace(new RegExp('[.]','gi'), ' .');
+	text = text.replace(new RegExp('[!]','gi'), ' !');
+	text = text.replace(new RegExp('[?]','gi'), ' ?');
+	text = text.replace(new RegExp('[;]','gi'), ' ;');
+	text = text.replace(new RegExp('[:]','gi'), ' :');
+	return text;
+}
+function removeSpacesFromPonctuation(text)
+{
+	text = text.replace(new RegExp(' ,','gi'), ',');
+	text = text.replace(new RegExp(' \\.','gi'), '.');
+	text = text.replace(new RegExp(' !','gi'), '!');
+	text = text.replace(new RegExp(' \\?','gi'), '?');
+	text = text.replace(new RegExp(' ;','gi'), ';');
+	text = text.replace(new RegExp(' :','gi'), ':');
+	return text;
+}
+
 //***************Fim de funções globais***********
 
 //********************Classes*********************
@@ -187,6 +221,29 @@ function Alisiri()
 		var index = Math.floor((Math.random()*key.reassemb.length)+0);
 		return key.reassemb[index];
 	}
+	
+	this.PreReplace = function(userInput, data){
+		userInput = addSpacesToPonctuation(userInput);
+		$(data).find("pre").find("add").each(function(index, el){
+			var xmlEl = $(el);
+			var oldValue = xmlEl.attr("old").toLowerCase();
+			var newValue = xmlEl.attr("new").toLowerCase();
+			
+			userInput = userInput.replace(new RegExp('\\s' + oldValue + '\\s','gi'), ' ' + newValue + ' ');
+			userInput = userInput.replace(new RegExp('^' + oldValue + '\\s','gi'), newValue + ' ');
+			userInput = userInput.replace(new RegExp('\\s' + oldValue + '$','gi'), ' ' + newValue);
+		});
+		userInput = removeSpacesFromPonctuation(userInput);
+		return userInput;
+		}
+		
+	this.PreProcess = function(userInput, data){
+		userInput = removeAccents(userInput);
+		userInput = userInput.toLowerCase();
+		userInput = this.PreReplace(userInput, data);
+		return userInput;
+	}
+	
 };
 
 function KeyElement()
@@ -207,8 +264,7 @@ function AlisiriGui()
 	var self = this;
 	
 	this.FirstTime = true;
-	this.DefaultMessage = "Desculpe, n&atilde;o entendi a &uacute;ltima coisa que voc&ecirc; disse";
-	this.TestDefaultMessage = "Desculpe, não entendi a última coisa que você disse";
+	this.DefaultMessage = "Desculpe, não entendi a última coisa que você disse";
 
 	this.AddText = function(text, cssClass){
 		$("#container").append('<div class="'+ cssClass +'">'+ text +'</div>');
@@ -261,8 +317,15 @@ function AlisiriGui()
 	}
 	
 	this.Speak = function(text){
-		//speech.play(encodeURIComponent(text), 'pt');
-		meSpeak.speak(text, { amplitude: 100, wordgap: 0, pitch: 50, speed: 175 });
+		if ( !($.browser.msie || is_safari)) {
+			text = removeAccents(text);
+			console.log(text);
+			meSpeak.speak(text, { amplitude: 100, wordgap: 3, pitch: 50, speed: 175 });
+		}
+		else
+		{
+			speech.play(encodeURIComponent(text), 'pt');
+		}
 	}
 
 	$('#txt-sender').keypress(function(event) {
