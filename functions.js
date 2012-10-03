@@ -38,6 +38,16 @@ function RecursiveRegEx(array, init)
 	}
 	return str;
 }
+
+function retira_acentos(text) {
+text = text.replace(new RegExp('[ÁÀÂÃ]','gi'), 'a');
+text = text.replace(new RegExp('[ÉÈÊ]','gi'), 'e');
+text = text.replace(new RegExp('[ÍÌÎ]','gi'), 'i');
+text = text.replace(new RegExp('[ÓÒÔÕ]','gi'), 'o');
+text = text.replace(new RegExp('[ÚÙÛ]','gi'), 'u');
+text = text.replace(new RegExp('[Ç]','gi'), 'c');
+return text;
+}
 //***************Fim de funções globais***********
 
 //********************Classes*********************
@@ -207,8 +217,8 @@ function AlisiriGui()
 	var self = this;
 	
 	this.FirstTime = true;
-	this.DefaultMessage = "Desculpe, n&atilde;o entendi a &uacute;ltima coisa que voc&ecirc; disse";
-	this.TestDefaultMessage = "Desculpe, não entendi a última coisa que você disse";
+	this.DefaultMessage = "Desculpe, não entendi a última coisa que você disse";
+	this.TestDefaultMessage = "Desculpe, n&atilde;o entendi a &uacute;ltima coisa que voc&ecirc; disse";
 
 	this.AddText = function(text, cssClass){
 		$("#container").append('<div class="'+ cssClass +'">'+ text +'</div>');
