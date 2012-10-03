@@ -48,6 +48,28 @@ text = text.replace(new RegExp('[ÚÙÛ]','gi'), 'u');
 text = text.replace(new RegExp('[Ç]','gi'), 'c');
 return text;
 }
+// \ . , - \/ # ! $ % \^ & \* ; : { } = \- _ ` ~ ( ) //Should I add em all?
+function addSpacesToPonctuation(text)
+{
+	text = text.replace(new RegExp('[,]','gi'), ' ,');
+	text = text.replace(new RegExp('[.]','gi'), ' .');
+	text = text.replace(new RegExp('[!]','gi'), ' !');
+	text = text.replace(new RegExp('[?]','gi'), ' ?');
+	text = text.replace(new RegExp('[;]','gi'), ' ;');
+	text = text.replace(new RegExp('[:]','gi'), ' :');
+	return text;
+}
+function removeSpacesFromPonctuation(text)
+{
+	text = text.replace(new RegExp(' ,','gi'), ',');
+	text = text.replace(new RegExp(' \\.','gi'), '.');
+	text = text.replace(new RegExp(' !','gi'), '!');
+	text = text.replace(new RegExp(' \\?','gi'), '?');
+	text = text.replace(new RegExp(' ;','gi'), ';');
+	text = text.replace(new RegExp(' :','gi'), ':');
+	return text;
+}
+
 //***************Fim de funções globais***********
 
 //********************Classes*********************
@@ -199,16 +221,17 @@ function Alisiri()
 	}
 	
 	this.PreReplace = function(userInput, data){
+		userInput = addSpacesToPonctuation(userInput);
 		$(data).find("pre").find("add").each(function(index, el){
 			var xmlEl = $(el);
 			var oldValue = xmlEl.attr("old").toLowerCase();
 			var newValue = xmlEl.attr("new").toLowerCase();
 			
-			userInput = userInput.replace(oldValue, newValue);
-			//
-			//BUG: Não tao simples quanto parecia (amanha vejo oq fazer)
-			//
+			userInput = userInput.replace(new RegExp('\\s' + oldValue + '\\s','gi'), ' ' + newValue + ' ');
+			userInput = userInput.replace(new RegExp('^' + oldValue + '\\s','gi'), newValue + ' ');
+			userInput = userInput.replace(new RegExp('\\s' + oldValue + '$','gi'), ' ' + newValue);
 		});
+		userInput = removeSpacesFromPonctuation(userInput);
 		return userInput;
 		}
 		
