@@ -5,9 +5,9 @@ var siriGui;
 //BACKEND TESTS
 module("Backend", {
   setup: function() {
-    siri = new Alisiri();
+    //siri = new Alisiri();
   }, teardown: function() {
-    siri = null;
+    //siri = null;
   }
 });
 
@@ -55,19 +55,33 @@ test( "Should get a array of possible keys in the right order", function(){
   equal(9,listKey[0].order, "Returns the keys within the right order");
 });
 
+test( "Should create blocks of inside regex", function(){
+  var a1 = new Array('hug','hash','jock', '*');
+  var a2 = new Array('hug','hash', '*', 'jock', '*');
+  var a3 = new Array('hug','hash', '*', 'jock');
+  var a4 = new Array('hug','hash','jock');
+  equal('\\s\\b((\\w)*\\shug hash jock)|(\\shug hash jock)\\b',RecursiveRegEx(a1,0), "Should create the right block");
+  equal('\\s\\b((\\w)*\\shug hash)|(\\shug hash)\\b\\s\\b((\\w)*\\sjock)|(\\sjock)\\b',RecursiveRegEx(a2,0), "Should create the right block");
+  equal('\\s\\b((\\w)*\\shug hash)|(\\shug hash)\\b\\s\\b((\\w)*\\sjock)|(\\sjock)\\b$',RecursiveRegEx(a3,0), "Should create the right block");
+  equal('\\s\\b((\\w)*\\shug hash jock)|(\\shug hash jock)\\b$',RecursiveRegEx(a4,0), "Should create the right block");
+});
+
 test( "Should create some regex", function(){
   var p1 = "* this *",
 	  p2 = "this *",
 	  p3 = "* this",
-	  p4 = "* this is a test *";
+	  p4 = "* this is a test *",
+	  p5 = "* everyone has * tenis *"
   var d1 = "/\\bthis\\b/gi",
 	  d2 = "/^this/gi",
 	  d3 = "/this$/gi",
-	  d4 = "/\\bthis is a test\\b/gi";
+	  d4 = "/\\bthis is a test\\b/gi",
+	  d5 = "/\\beveryone has\\b\\s\\b((\\w)*\\stenis)|(\\stenis)\\b/gi";
   equal(siri.ConvertToRegExp(p1).toString(), d1, "First phrase successfully converted");
   equal(siri.ConvertToRegExp(p2).toString(), d2, "Second phrase successfully converted");
   equal(siri.ConvertToRegExp(p3).toString(), d3, "Third phrase successfully converted");
   equal(siri.ConvertToRegExp(p4).toString(), d4, "Forth phrase successfully converted");
+  equal(siri.ConvertToRegExp(p5).toString(), d5, "Fifth phrase successfully converted");
 });
 
 test( "Should verify if the decomp is valid or not", function(){
@@ -109,14 +123,19 @@ test( "Should get a reassemb", function(){
   ok(resp != null, "Should not be null");
 });
 
+test( "Should remove accents", function(){
+  var out = retira_acentos(siriGui.DefaultMessage);
+  equal(out, "Desculpe, nao entendi a ultima coisa que voce disse", "returns the right phrase");
+});
+
 //************************************MODULE GUI
 module("GUI", {
   setup: function() {
-    siri = new Alisiri();
+    //siri = new Alisiri();
 	siriGui = new AlisiriGui();
 	$("#container").empty();
   }, teardown: function() {
-    siri = null;
+    //siri = null;
 	siriGui = null;
 	$("#container").empty();
   }
@@ -140,7 +159,7 @@ test( "Should insert a new div with text of user text", function(){
 	var divContainer = $("#container");
 	equal(divContainer.html(), "", "Container vazio antes do método");
 	siriGui.AddUserText("text of the message");
-	equal(divContainer.html(), '<div class="user-text">text of the message</div>', "Container com mensagem da alisiri depois do método");	
+	equal(divContainer.html(), '<div class="user-text">text of the message</div>', "Container com mensagem do usuário depois do método");	
 });
 
 test( "Should get the user's message", function(){

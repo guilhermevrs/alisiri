@@ -2,11 +2,55 @@ $(document).ready(function(){
 	$('#txt-sender').focus();
 });
 
-//Constantes
+//*******************Constantes*******************
 var database_url = "database.xml";
 var speech = new GoogleTTS('pt');
+//*****************Fim de constantes**************
 
-//Classes
+//*****************Funções globais****************
+function RecursiveRegEx(array, init)
+{
+//\s\b((\w)*\s[AQUI])|(\s[AQUI])\b
+	var str = "\\s\\b((\\w)*\\s";
+	var replace = "";
+	var recursive = false;
+	for(var i=init; i<array.length; i++){
+		if(array[i] != '*'){
+			if(i!=init)
+				replace += ' ';
+			replace += array[i];
+		}
+		else
+		{
+			if(i<array.length-1)
+			{
+				recursive = true;
+				str += replace + ')|(\\s' + replace + ')\\b';
+				str += RecursiveRegEx(array, i+1);
+			}
+		}
+	}
+	if(!recursive)
+	{
+		str += replace + ')|(\\s' + replace + ')\\b';
+		if(array[array.length-1] != '*')
+			str += '$';
+	}
+	return str;
+}
+
+function retira_acentos(text) {
+text = text.replace(new RegExp('[ÁÀÂÃ]','gi'), 'a');
+text = text.replace(new RegExp('[ÉÈÊ]','gi'), 'e');
+text = text.replace(new RegExp('[ÍÌÎ]','gi'), 'i');
+text = text.replace(new RegExp('[ÓÒÔÕ]','gi'), 'o');
+text = text.replace(new RegExp('[ÚÙÛ]','gi'), 'u');
+text = text.replace(new RegExp('[Ç]','gi'), 'c');
+return text;
+}
+//***************Fim de funções globais***********
+
+//********************Classes*********************
 function Alisiri()
 {
 	this.connectToDatabase = function(callback) {
@@ -33,7 +77,7 @@ function Alisiri()
 
 	this.CheckIfIsQuitPhrase = function(phrase, data) {
 		var t = $(data).find("quit").find('add[text="'+ phrase + '"]');
-		return t.html() != undefined;
+		return t.length > 0;
 	},
 	
 	this.GetPossibleKeys = function(phrase, data){
@@ -42,7 +86,8 @@ function Alisiri()
 		$(data).find("keys").find("add").each(function(index, el){
 			var xmlEl = $(el);
 			var key = xmlEl.attr("key").toLowerCase();
-			if(minPhrase.indexOf(key) != -1)
+			var regOb = new RegExp('\\b'+key+'\\b');
+			if(regOb.test(minPhrase))
 			{
 				var newKeyEl = new KeyElement();
 				newKeyEl.order = parseInt(xmlEl.attr("order"));
@@ -70,42 +115,63 @@ function Alisiri()
 	this.ConvertToRegExp = function(decomp){
 		var splitDecomp = decomp.split(" ");
 		var str = "";
+		var ini = "";
+		var fim = "";
+		var dec = "";
 		var i;
 		if(splitDecomp.length > 1)
 		{
-			if(splitDecomp[0]=="*")
+			if(splitDecomp[0]!="*")
 			{
-				if(splitDecomp[splitDecomp.length-1] == "*")
+				str="^";
+				for(i=0; i<splitDecomp.length-1; i++)
 				{
-					str+="\\b ";
-					for(i=1;i<splitDecomp.length-1;i++){
-						str+=splitDecomp[i];
-						if(i<splitDecomp.length-2)
-							str+=" ";
+					dec = splitDecomp[i];
+					if(dec != '*')
+					{
+						if(i>0)
+							str += ' ';
+						str += dec;
 					}
-					str+=" \\b";
-				}
-				else
-				{
-					for(i=1;i<splitDecomp.length;i++){
-						str+=splitDecomp[i];
+					else
+					{
+						str += '\\s';
 						if(i<splitDecomp.length-1)
-							str+=" ";
+						{
+							str += RecursiveRegEx(splitDecomp,i+1);
+						}
 					}
-					str+=" $";
 				}
 			}
-			else if(splitDecomp[splitDecomp.length-1] == "*")
+			else
 			{
-				str+="^ ";
-				for(i=0;i<splitDecomp.length-1;i++){
-					str+=splitDecomp[i];
-					if(i<splitDecomp.length-2)
-						str+=" ";
+				for(i=1; i<splitDecomp.length; i++)
+				{
+					dec = splitDecomp[i];
+					if(dec != '*')
+					{
+						if(i>1)
+							str += ' '
+						str += dec;
+						if(i==splitDecomp.length-1)
+							str = str + "$";
+					}
+					else
+					{
+						if(i==splitDecomp.length-1)
+						{
+							str = "\\b" + str + '\\b';
+						}
+						else
+						{
+							str = "\\b" + str + "\\b" + RecursiveRegEx(splitDecomp,i+1);
+							break;
+						}
+					}
+						
 				}
 			}
 		}
-		str = str.replace("é", "\x233");
 		return new RegExp(str, "gi");
 	},
 	
@@ -148,10 +214,12 @@ function ReassembElement()
 
 function AlisiriGui()
 {
+	var self = this;
+	
 	this.FirstTime = true;
-
-	this.DefaultMessage = "Desculpe, não entendi";
-
+	this.DefaultMessage = "Desculpe, não entendi a última coisa que você disse";
+	this.TestDefaultMessage = "Desculpe, n&atilde;o entendi a &uacute;ltima coisa que voc&ecirc; disse";
+	
 	this.AddText = function(text, cssClass){
 		$("#container").append('<div class="'+ cssClass +'">'+ text +'</div>');
 		this.ScrollContainer();
@@ -185,21 +253,27 @@ function AlisiriGui()
 					self.AddAlisiriText(siri.getInitialPhrase(data));
 					self.FirstTime = false;
 				}
-				var listKey = siri.GetPossibleKeysWithDecomp(userInput, data);
-				if(listKey != null)
+				if(siri.CheckIfIsQuitPhrase(userInput, data))
 				{
-					var reassemb = siri.GetRandomReassemb(listKey);
-					self.AddAlisiriText(reassemb.text);
+					self.AddAlisiriText(siri.getFinalPhrase(data));
+				}
+				else 
+				{
+					var listKey = siri.GetPossibleKeysWithDecomp(userInput, data);
+					if(listKey != null)
+					{
+						var reassemb = siri.GetRandomReassemb(listKey);
+						self.AddAlisiriText(reassemb.text);
+					}
 				}
 			});
 		}
 	}
 	
 	this.Speak = function(text){
-	speech.play(encodeURIComponent(text), 'pt');
+		speech.play(encodeURIComponent(text), 'pt');
 	}
-	
-	var self = this;
+
 	$('#txt-sender').keypress(function(event) {
 		if (event.which == 13)
 			self.ProcessUserInput();
@@ -209,3 +283,4 @@ function AlisiriGui()
 		self.ProcessUserInput();
 	});
 }
+//*****************Fim de classes***********************
