@@ -39,7 +39,7 @@ function RecursiveRegEx(array, init)
 	return str;
 }
 
-function retira_acentos(text) {
+function removeAccents(text) {
 text = text.replace(new RegExp('[ÁÀÂÃ]','gi'), 'a');
 text = text.replace(new RegExp('[ÉÈÊ]','gi'), 'e');
 text = text.replace(new RegExp('[ÍÌÎ]','gi'), 'i');
@@ -197,6 +197,28 @@ function Alisiri()
 		var index = Math.floor((Math.random()*key.reassemb.length)+0);
 		return key.reassemb[index];
 	}
+	
+	this.PreReplace = function(userInput, data){
+		$(data).find("pre").find("add").each(function(index, el){
+			var xmlEl = $(el);
+			var oldValue = xmlEl.attr("old").toLowerCase();
+			var newValue = xmlEl.attr("new").toLowerCase();
+			
+			userInput = userInput.replace(oldValue, newValue);
+			//
+			//BUG: Não tao simples quanto parecia (amanha vejo oq fazer)
+			//
+		});
+		return userInput;
+		}
+		
+	this.PreProcess = function(userInput, data){
+		userInput = removeAccents(userInput);
+		userInput = userInput.toLowerCase();
+		userInput = this.PreReplace(userInput, data);
+		return userInput;
+	}
+	
 };
 
 function KeyElement()
