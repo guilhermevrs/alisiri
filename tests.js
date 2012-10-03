@@ -123,6 +123,11 @@ test( "Should get a reassemb", function(){
   ok(resp != null, "Should not be null");
 });
 
+test( "Should remove accents", function(){
+  var out = retira_acentos(siriGui.DefaultMessage);
+  equal(out, "Desculpe, nao entendi a ultima coisa que voce disse", "returns the right phrase");
+});
+
 //************************************MODULE GUI
 module("GUI", {
   setup: function() {
@@ -184,5 +189,5 @@ test( "Should print a default message if no key was selected", function(){
   equal(divContainer.html(), "", "Container vazio antes do submit");
   listKey = siri.GetPossibleKeysWithDecomp("gosantos", '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Ola, como vai voce?</initial><final>Tchau, ate mais</final><keys><add key="Chaves" decomp="*" order="5"><reassemb text="r1"/><reassemb text="r2"/></add><add key="Chaves" decomp="* isto e *" order="9"><reassemb text="r3"/><reassemb text="r4"/></add><add key="madruga" decomp="*" order="1"><reassemb text="r5"/><reassemb text="r6"/></add></keys></brain>');
   equal(null, listKey, "No key should return");
-  equal(divContainer.html(), '<div class="alisiri-text">' + siriGui.TestDefaultMessage + '</div>', "Container com mensagem da alisiri depois do submit");	
+  equal(divContainer.html(), '<div class="alisiri-text">' + siriGui.DefaultMessage + '</div>', "Container com mensagem da alisiri depois do submit");	
 });
