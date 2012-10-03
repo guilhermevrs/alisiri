@@ -55,6 +55,7 @@ test( "Should get a array of possible keys in the right order", function(){
   equal(9,listKey[0].order, "Returns the keys within the right order");
 });
 
+
 test( "Should create blocks of inside regex", function(){
   var a1 = new Array('hug','hash','jock', '*');
   var a2 = new Array('hug','hash', '*', 'jock', '*');
@@ -124,8 +125,55 @@ test( "Should get a reassemb", function(){
 });
 
 test( "Should remove accents", function(){
-  var out = retira_acentos(siriGui.DefaultMessage);
+  var out = removeAccents(siriGui.DefaultMessage);
   equal(out, "Desculpe, nao entendi a ultima coisa que voce disse", "returns the right phrase");
+});
+
+test("Should replace preprocessing keys", function(){
+  var result = siri.PreReplace("Entrada do usuario vc. q mallandro", '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Sou galo</initial><final>Tchau, ate mais</final><pre><add old="vc" new="voce"/><add old="q" new="que"/></pre></brain>');
+  equal(result , "Entrada do usuario voce. que mallandro", "Replaces preprocessing keys sucessfully");
+  
+  result = siri.PreReplace("legal o q", '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Sou galo</initial><final>Tchau, ate mais</final><pre><add old="vc" new="voce"/><add old="q" new="que"/></pre></brain>');
+  equal(result , "legal o que", "Replaces preprocessing keys sucessfully");
+  
+  result = siri.PreReplace("q legal", '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Sou galo</initial><final>Tchau, ate mais</final><pre><add old="vc" new="voce"/><add old="q" new="que"/></pre></brain>');
+  equal(result , "que legal", "Replaces preprocessing keys sucessfully");
+});
+
+test("Should preprocess user input", function(){
+  var result = siri.PreProcess("Entrada do usuario vc. Q mallandro", '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Sou galo</initial><final>Tchau, ate mais</final><pre><add old="vc" new="voce"/><add old="q" new="que"/></pre></brain>');
+  equal(result , "entrada do usuario voce. que mallandro", "Normalizes phrase and replaces preprocessing keys sucessfully");
+  
+  result = siri.PreProcess(siriGui.DefaultMessage, '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Sou galo</initial><final>Tchau, ate mais</final><pre><add old="vc" new="voce"/><add old="q" new="que"/></pre></brain>');
+  equal(result , "desculpe, nao entendi a ultima coisa que voce disse", "Normalizes phrase and replaces preprocessing keys sucessfully");
+});
+
+test("Should add spaces before ponctuation", function(){
+  var result = addSpacesToPonctuation("ola, ritmo de festa!");
+  equal(result , "ola , ritmo de festa !", "Adds spaces succesfully");
+  
+  result = addSpacesToPonctuation("a");
+  equal(result , "a", "Adds spaces succesfully");
+  
+  result = addSpacesToPonctuation("?");
+  equal(result , " ?", "Adds spaces succesfully");
+  
+  result = addSpacesToPonctuation("a?");
+  equal(result , "a ?", "Adds spaces sucessfully");
+});
+
+test("Should remove spaces before ponctuation", function(){
+  var result = removeSpacesFromPonctuation("ola , ritmo de festa !");
+  equal(result , "ola, ritmo de festa!", "Removes spaces succesfully");
+  
+  result = removeSpacesFromPonctuation("a");
+  equal(result , "a", "Removes spaces succesfully");
+  
+  result = removeSpacesFromPonctuation(" ?");
+  equal(result , "?", "Removes spaces succesfully");
+  
+  result = removeSpacesFromPonctuation("a ?");
+  equal(result , "a?", "Removes spaces sucessfully");
 });
 
 //************************************MODULE GUI

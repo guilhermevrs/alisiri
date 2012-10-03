@@ -14,10 +14,9 @@
 		<add old="v1" new="v2"/>
 		<add old="v3" new="v4"/>
 	</pos>
-	<syn>
-		<add old="v1" new="v2"/>
-		<add old="v3" new="v4"/>
-	</syn>
+	<syns>
+		<add syn="@casa" matches="case barraco ape moradia"/>
+	</syns>
 	<keys>
 		<add key="Ola" decomp="*" order="1">
 			<reassemb text="Como vai você?"/>
