@@ -3,8 +3,8 @@
 	<initial>Sou galo</initial>
 	<final>Tchau, ate mais</final>
 	<quit>
-		<add text="Adeus"/>
-		<add text="Ate logo"/>
+		<add text="adeus"/>
+		<add text="ate logo"/>
 	</quit>
 	<pre>
 		<add old="vc" new="voce"/>
@@ -15,10 +15,10 @@
 		<add old="v3" new="v4"/>
 	</pos>
 	<syns>
-		<add syn="@casa" matches="case barraco ape moradia"/>
+		<add syn="@casa" matches="casa barraco ape moradia"/>
 	</syns>
 	<keys>
-		<add key="Ola" decomp="*" order="1">
+		<add key="ola" decomp="*" order="1">
 			<reassemb text="Como vai você?"/>
 			<reassemb text="Guilherme gato"/>
 			<reassemb text="Olá marilene"/>
