@@ -67,7 +67,7 @@ function Alisiri()
 
 	this.CheckIfIsQuitPhrase = function(phrase, data) {
 		var t = $(data).find("quit").find('add[text="'+ phrase + '"]');
-		return t.html() != undefined;
+		return t.length > 0;
 	},
 	
 	this.GetPossibleKeys = function(phrase, data){
@@ -243,11 +243,18 @@ function AlisiriGui()
 					self.AddAlisiriText(siri.getInitialPhrase(data));
 					self.FirstTime = false;
 				}
-				var listKey = siri.GetPossibleKeysWithDecomp(userInput, data);
-				if(listKey != null)
+				if(siri.CheckIfIsQuitPhrase(userInput, data))
 				{
-					var reassemb = siri.GetRandomReassemb(listKey);
-					self.AddAlisiriText(reassemb.text);
+					self.AddAlisiriText(siri.getFinalPhrase(data));
+				}
+				else 
+				{
+					var listKey = siri.GetPossibleKeysWithDecomp(userInput, data);
+					if(listKey != null)
+					{
+						var reassemb = siri.GetRandomReassemb(listKey);
+						self.AddAlisiriText(reassemb.text);
+					}
 				}
 			});
 		}
