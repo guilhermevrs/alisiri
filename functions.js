@@ -49,7 +49,7 @@ text = text.replace(new RegExp('[Ç]','gi'), 'c');
 return text;
 }
 // \ . , - \/ # ! $ % \^ & \* ; : { } = \- _ ` ~ ( ) //Should I add em all?
-function addSpacesToPonctuation(text)
+function addSpacesToPunctuation(text)
 {
 	text = text.replace(new RegExp('[,]','gi'), ' ,');
 	text = text.replace(new RegExp('[.]','gi'), ' .');
@@ -59,7 +59,7 @@ function addSpacesToPonctuation(text)
 	text = text.replace(new RegExp('[:]','gi'), ' :');
 	return text;
 }
-function removeSpacesFromPonctuation(text)
+function removeSpacesFromPunctuation(text)
 {
 	text = text.replace(new RegExp(' ,','gi'), ',');
 	text = text.replace(new RegExp(' \\.','gi'), '.');
@@ -221,7 +221,7 @@ function Alisiri()
 	}
 	
 	this.PreReplace = function(userInput, data){
-		userInput = addSpacesToPonctuation(userInput);
+		userInput = addSpacesToPunctuation(userInput);
 		$(data).find("pre").find("add").each(function(index, el){
 			var xmlEl = $(el);
 			var oldValue = xmlEl.attr("old").toLowerCase();
@@ -231,14 +231,42 @@ function Alisiri()
 			userInput = userInput.replace(new RegExp('^' + oldValue + '\\s','gi'), newValue + ' ');
 			userInput = userInput.replace(new RegExp('\\s' + oldValue + '$','gi'), ' ' + newValue);
 		});
-		userInput = removeSpacesFromPonctuation(userInput);
+		userInput = removeSpacesFromPunctuation(userInput);
 		return userInput;
 		}
+		
+	this.ReplaceSynonyms = function(userInput, data){
+	
+		userInput = userInput.replace(new RegExp('\\s','gi'), '  ');
+		
+		$(data).find("syns").find("add").each(function(index, el){
+			var xmlEl = $(el);
+			var syn = xmlEl.attr("syn").toLowerCase();
+			var matches = xmlEl.attr("matches").toLowerCase();
+			var matchlist = matches.split(" ");
+			
+			for(var i = 0; i < matchlist.length; i++)
+			{
+				userInput = userInput.replace(new RegExp('\\s' + matchlist[i] + '\\s','gi'), ' ' + syn + ' ');
+				userInput = userInput.replace(new RegExp('^' + matchlist[i] + '\\s','gi'), syn + ' ');
+				userInput = userInput.replace(new RegExp('\\s' + matchlist[i] + '$','gi'), ' ' + syn);
+			}
+		});
+		
+		userInput = userInput.replace(new RegExp('\\s\\s','gi'), ' ');
+		return userInput;
+	}
 		
 	this.PreProcess = function(userInput, data){
 		userInput = removeAccents(userInput);
 		userInput = userInput.toLowerCase();
+		
+		userInput = addSpacesToPunctuation(userInput);
+		
 		userInput = this.PreReplace(userInput, data);
+		userInput = this.ReplaceSynonyms(userInput, data);
+		
+		userInput = removeSpacesFromPunctuation(userInput);
 		return userInput;
 	}
 	
@@ -293,7 +321,9 @@ function AlisiriGui()
 			var userInput = this.GetUserMessage();
 			var self = this;
 			this.AddUserText(userInput);
+			
 			siri.connectToDatabase(function(data){
+				userInput = siri.PreProcess(userInput, data);
 				if(self.FirstTime) {
 					self.AddAlisiriText(siri.getInitialPhrase(data));
 					self.FirstTime = false;
