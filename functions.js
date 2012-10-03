@@ -261,7 +261,8 @@ function AlisiriGui()
 	}
 	
 	this.Speak = function(text){
-		speech.play(encodeURIComponent(text), 'pt');
+		//speech.play(encodeURIComponent(text), 'pt');
+		meSpeak.speak(text, { amplitude: 100, wordgap: 0, pitch: 50, speed: 175 });
 	}
 
 	$('#txt-sender').keypress(function(event) {

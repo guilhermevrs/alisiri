@@ -13,10 +13,13 @@
 	</div>
 	<script type="text/javascript" src="jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="google-tts.js"></script>
+	<script type="text/javascript" src="mespeak/mespeak.js"></script>
 	<script type="text/javascript" src="functions.js"></script>
 	<script type="text/javascript">
 		var siriGui = new AlisiriGui();
 		var siri = new Alisiri();
+		meSpeak.loadConfig("mespeak/mespeak_config.json");
+		meSpeak.loadVoice("mespeak/voices/pt.json");
 	</script>
 </body>
 </html>
