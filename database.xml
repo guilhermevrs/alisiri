@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <brain>
 	<initial>Olá, meu nome é Alisiri</initial>
-	<final>Tchau, ate mais</final>
+	<final>Tchau, até mais</final>
 	<quit>
 		<add text="adeus"/>
 		<add text="ate logo"/>
+		<add text="ate mais"/>
 		<add text="tchau"/>
+		<add text="sair"/>
 	</quit>
 	<pre>
 		<add old="vc" new="voce"/>
@@ -13,17 +15,43 @@
 		<add old="td" new="tudo"/>
 	</pre>
 	<pos>
-		<add old="v1" new="v2"/>
-		<add old="v3" new="v4"/>
+		<add old="@" new=""/>
 	</pos>
 	<syns>
 		<add syn="@casa" matches="casa barraco ape moradia"/>
 		<add syn="@ola" matches="ola oi"/>
+		<add syn="@voce" matches="voce tu"/>
+		<add syn="@se" matches="se talvez sera"/>
 	</syns>
 	<keys>
-		<add key="@ola" decomp="*" order="1">
-			<reassemb text="Como vai você?"/>
-			<reassemb text="Olá, tudo bem?"/>
+		<add key="@ola" decomp="*" order="3">
+			<reassemb text="Olá!"/>
+			<reassemb text="Oi, sobre o que você quer conversar?"/>
+			<reassemb text="Oi, vamos falar de coisa boa?"/>
+		</add>
+		<add key="tudo" decomp="* tudo *" order="1">
+			<reassemb text="tudo (2)!"/>
+		</add>
+		<add key="sim" decomp="*" order="1">
+			<reassemb text="Você tem certeza?"/>
+			<reassemb text="Você está certo ao respeito disso?"/>
+		</add>
+		<add key="nao" decomp="*" order="1">
+			<reassemb text="Você tem certeza?"/>
+			<reassemb text="Você está certo ao respeito disso?"/>
+		</add>
+		<add key="ok" decomp="ok" order="1">
+			<reassemb text="OK!"/>
+		</add>
+		<add key="vamos" decomp="* vamos *" order="1">
+			<reassemb text="Gostei do seu entusiasmo!"/>
+			<reassemb text="Você parece bem confiante sobre (2)!"/>
+		</add>
+		<add key="@se" decomp="* @se *" order="1">
+			<reassemb text="Você tem certeza que (2)?"/>
+		</add>
+		<add key="futebol" decomp="*" order="2">
+			<reassemb text="Faz muito tempo que não assisto aos jogos de futebol."/>
 		</add>
 	</keys>
 </brain>
