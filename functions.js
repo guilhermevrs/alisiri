@@ -7,6 +7,7 @@ var is_safari = $.browser.webkit && !window.chrome;
 
 $(document).ready(function(){
 	$('#txt-sender').focus();
+	siriGui.Hello();
 });
 
 //*****************Funções globais****************
@@ -356,6 +357,13 @@ function AlisiriGui()
 				}
 			});
 		}
+	}
+	
+	this.Hello = function(){
+	var self = this;
+	siri.connectToDatabase(function(data){
+		self.AddAlisiriText(siri.getInitialPhrase(data));
+		});
 	}
 	
 	this.Speak = function(text){
