@@ -36,7 +36,7 @@ function RecursiveRegEx(array, init)
 		if(array[i] != '*'){
 			if(i!=init)
 				str += ' ';
-			str += array[i];
+			str += array[i].replace("@", " @");
 		}
 		else
 		{
@@ -238,7 +238,7 @@ function Alisiri()
 					{
 						if(i>0)
 							str += ' ';
-						str += dec;
+						str += dec.replace("@", " @");
 					}
 					else
 					{
@@ -260,7 +260,7 @@ function Alisiri()
 					{
 						if(i>1)
 							str += ' '
-						str += dec;
+						str += dec.replace("@", " @");
 						if(i==splitDecomp.length-1)
 							str = '\\b' + str + "$\\b";
 					}
@@ -443,7 +443,7 @@ function AlisiriGui()
 						{
 							for(var j=0; j<allN.length; j++)
 							{
-								reassemb.text = adjustReassemb(userInput, reassemb.text,key.decomp,allN[j]);
+								reassemb.text = adjustReassemb(userInput, reassemb.text,listKey.decomp,allN[j]);
 							}
 						}
 						self.AddAlisiriText(siri.PostProcess(reassemb.text));
