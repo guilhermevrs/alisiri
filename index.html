@@ -4,10 +4,16 @@
 	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="max-age=3600, PUBLIC">
 	<link rel="stylesheet" type="text/css" href="reset.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="style.css" media="all" />
+	<link rel="stylesheet" href="iphone.css" type="text/css" media="screen" charset="utf-8" />
 </head>
 <body>
 	<div id="distance"></div>
-	<div id="sidebar" class="sidebar"></div>
+	<div id="sidebar" class="sidebar">
+		<img class="sidebar-toggle" src="images/controles.png" alt="controles da alisiri"/>
+		<div class="sidebar-content">
+			<input type="checkbox" class="on_off_sound" />
+		</div>
+	</div>
 	<div id="container" class="rounded-15">
 	</div>
 	<div id="sender-container">
@@ -15,22 +21,11 @@
 		<input id="btn-sender" type="button" value="Enviar" class="rounded-5"/>
 	</div>
 	<script type="text/javascript" src="jquery-1.8.2.min.js"></script>
-	<script type="text/javascript" src="google-tts.js"></script>
-	<!--[if lt IE 8]><!-->
-<!--<script type="text/javascript" src="../mespeak/mespeak.js"></script>-->
-<!--<![endif]-->
+	<script src="iphone-style-checkboxes.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" src="functions.js" charset="UTF-8"></script>
 	<script type="text/javascript">
 		var siriGui = new AlisiriGui();
 		var siri = new Alisiri();
-		if ( !($.browser.msie || is_safari)) {
-			//meSpeak.loadConfig("../mespeak/mespeak_config.json");
-			//meSpeak.loadVoice("../mespeak/voices/pt.json");
-		}
-		else
-		{
-			var speech = new GoogleTTS('pt');
-		}
 	</script>
 </body>
 </html>

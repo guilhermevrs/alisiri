@@ -2,32 +2,62 @@
 var database_url = "database.xml";
 var is_chrome = $.browser.webkit && !!window.chrome;
 var is_safari = $.browser.webkit && !window.chrome;
+var use_sound = false;
+var scriptLoaded = false;
 //*****************Fim de constantes**************
 
 
 $(document).ready(function(){
 	$('#txt-sender').focus();
-	$(".sidebar").live("click", function(){ 
-		var objMain = $(this);
-		if(objMain.hasClass(".sidebarExpanded")){
+	$(".sidebar-toggle").live("click", function(){ 
+		var objMain = $(".sidebar");
+		if(objMain.hasClass(".sidebar-expanded")){
 			objMain.animate({
 				width: "25px",
 				height: "175px"
 			  }, 500 );
-			objMain.removeClass(".sidebarExpanded");
+			objMain.removeClass(".sidebar-expanded");
+			$(".sidebar-content").removeClass("sidebar-content-expand");
 		}
 		else{
 			objMain.animate({
 				width: "230px",
 				height: "250px"
 			  }, 500 );
-			objMain.addClass(".sidebarExpanded");
+			objMain.addClass(".sidebar-expanded");
+			$(".sidebar-content").addClass("sidebar-content-expand");
+			$('.on_off_sound').iphoneStyle(
+				{ checkedLabel: 'Som ON', 
+				  uncheckedLabel: 'Som OFF',
+				  onChange: function(elem, value) { 
+						enableSound(value);
+					}
+			});
 		}
 	});
 	siriGui.Hello();
 });
 
 //*****************Funções globais****************
+function loadSound()
+{
+	if ( !($.browser.msie || is_safari)) {
+		meSpeak.loadConfig("mespeak/mespeak_config.json");
+		meSpeak.loadVoice("mespeak/voices/pt.json");
+	}
+}
+
+function enableSound(enable){
+	use_sound = enable;
+	if(enable && !scriptLoaded)
+	{
+		scriptLoaded = true;
+		var element = document.createElement("script");
+		element.src = "mespeak/mespeak.js";
+		document.body.appendChild(element);
+		//while(typeof(meSpeak) == 'undefined'))
+	}
+}
 function RecursiveRegEx(array, init)
 {
 	var str = "\\b";
@@ -462,14 +492,18 @@ function AlisiriGui()
 	}
 	
 	this.Speak = function(text){
-		if ( !($.browser.msie || is_safari)) {
-			text = removeAccents(text);
-			console.log(text);
-			//meSpeak.speak(text, { amplitude: 100, wordgap: 3, pitch: 50, speed: 175 });
-		}
-		else
-		{
-			speech.play(encodeURIComponent(text), 'pt');
+		if(use_sound){
+			if ( !($.browser.msie || is_safari)) {
+				try
+				{
+					meSpeak.loadConfig("mespeak/mespeak_config.json");
+					meSpeak.loadVoice("mespeak/voices/pt.json");
+				}
+				catch(err)
+				{}
+				text = removeAccents(text);
+				meSpeak.speak(text, { amplitude: 100, wordgap: 3, pitch: 50, speed: 175 });
+			}
 		}
 	}
 

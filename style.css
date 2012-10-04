@@ -3,7 +3,7 @@ html, body {
 }
 body {
     text-align:center; /* Centralizar na horizontal no IE caso o site entre em Quirks mode */
-	background:white url('bgnoise.png') repeat;
+	background:white url('images/bgnoise.png') repeat;
 }
 #distance {
     width:1px;
@@ -62,8 +62,16 @@ body {
 	background-color: black;
 }
 
-.sidebarExpanded {
+.sidebar-toggle{
+	float: right;
+}
 
+.sidebar-content{
+	display: none;
+}
+
+.sidebar-content-expand{
+	display: inline !important;
 }
 
 .rounded-15 {
@@ -124,4 +132,9 @@ body {
     /* reduce the damage in FF3.0 */
     display: block; 
     width: 0;
+}
+
+.iPhoneCheckContainer
+{
+	margin-top: 18px !important;
 }

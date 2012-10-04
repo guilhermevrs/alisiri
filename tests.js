@@ -191,7 +191,8 @@ test("Should replace synonyms", function(){
 });
 
 test("Should replace get n-esim * content", function(){
-	var s = "This is a common mistake";
+	var s = "This is a common mistake"
+		s1 = "ola blablabala";
 	var d1 = "this *",
 		d2 = "* common mistake"
 		d3 = "this * common *";
