@@ -7,6 +7,7 @@ var is_safari = $.browser.webkit && !window.chrome;
 
 $(document).ready(function(){
 	$('#txt-sender').focus();
+	siriGui.Hello();
 });
 
 //*****************Funções globais****************
@@ -269,9 +270,12 @@ function Alisiri()
 		return ret;
 	}
 	
-	this.PreReplace = function(userInput, data){
+	this.ProcessorReplace = function(userInput, data, mode){
+		if(mode != "pre" && mode !="pos")
+			return null;
+			
 		userInput = addSpacesToPunctuation(userInput);
-		$(data).find("pre").find("add").each(function(index, el){
+		$(data).find(mode).find("add").each(function(index, el){
 			var xmlEl = $(el);
 			var oldValue = xmlEl.attr("old").toLowerCase();
 			var newValue = xmlEl.attr("new").toLowerCase();
@@ -312,11 +316,20 @@ function Alisiri()
 		
 		userInput = addSpacesToPunctuation(userInput);
 		
-		userInput = this.PreReplace(userInput, data);
+		userInput = this.ProcessorReplace(userInput, data, "pre");
 		userInput = this.ReplaceSynonyms(userInput, data);
 		
 		userInput = removeSpacesFromPunctuation(userInput);
 		return userInput;
+	}
+	
+	this.PostProcess = function(inputText, data){
+		inputText = addSpacesToPunctuation(inputText);
+		
+		inputText = this.ProcessorReplace(inputText, data, "pos");
+		
+		inputText = removeSpacesFromPunctuation(inputText);
+		return inputText;
 	}
 	
 };
@@ -391,6 +404,14 @@ function AlisiriGui()
 				}
 			});
 		}
+	}
+	
+	this.Hello = function(){
+	var self = this;
+	siri.connectToDatabase(function(data){
+		self.AddAlisiriText(siri.getInitialPhrase(data));
+		self.FirstTime = false;
+		});
 	}
 	
 	this.Speak = function(text){
