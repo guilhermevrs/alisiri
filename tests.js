@@ -130,13 +130,13 @@ test( "Should remove accents", function(){
 });
 
 test("Should replace preprocessing keys", function(){
-  var result = siri.PreReplace("Entrada do usuario vc. q mallandro", '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Sou galo</initial><final>Tchau, ate mais</final><pre><add old="vc" new="voce"/><add old="q" new="que"/></pre></brain>');
+  var result = siri.ProcessorReplace("Entrada do usuario vc. q mallandro", '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Sou galo</initial><final>Tchau, ate mais</final><pre><add old="vc" new="voce"/><add old="q" new="que"/></pre></brain>', "pre");
   equal(result , "Entrada do usuario voce. que mallandro", "Replaces preprocessing keys sucessfully");
   
-  result = siri.PreReplace("legal o q", '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Sou galo</initial><final>Tchau, ate mais</final><pre><add old="vc" new="voce"/><add old="q" new="que"/></pre></brain>');
+  result = siri.ProcessorReplace("legal o q", '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Sou galo</initial><final>Tchau, ate mais</final><pre><add old="vc" new="voce"/><add old="q" new="que"/></pre></brain>', "pre");
   equal(result , "legal o que", "Replaces preprocessing keys sucessfully");
   
-  result = siri.PreReplace("q legal", '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Sou galo</initial><final>Tchau, ate mais</final><pre><add old="vc" new="voce"/><add old="q" new="que"/></pre></brain>');
+  result = siri.ProcessorReplace("q legal", '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Sou galo</initial><final>Tchau, ate mais</final><pre><add old="vc" new="voce"/><add old="q" new="que"/></pre></brain>', "pre");
   equal(result , "que legal", "Replaces preprocessing keys sucessfully");
 });
 
@@ -176,6 +176,14 @@ test("Should remove spaces before punctuation", function(){
   equal(result , "a?", "Removes spaces sucessfully");
 });
 
+test("Should post-process user input", function(){
+  var result = siri.PostProcess("teste dpois, antes!", '<?xml version="1.0" encoding="UTF-8"?><brain><pos><add old="dpois" new="depois"/><add old="ksa" new="casa"/></pos></brain>');
+  equal(result , "teste depois, antes!", "Replaces post-processing keys sucessfully");
+  
+  result = siri.PostProcess("ksa dos mallandros", '<?xml version="1.0" encoding="UTF-8"?><brain><pos><add old="dpois" new="depois"/><add old="ksa" new="casa"/></pos></brain>');
+  equal(result , "casa dos mallandros", "Replaces post-processing keys sucessfully");
+  });
+  
 test("Should replace synonyms", function(){
   var result = siri.ReplaceSynonyms("ae, casa dos manos!", '<?xml version="1.0" encoding="UTF-8"?><brain><syns><add syn="@casa" matches="casa barraco ape moradia"/></syns></brain>');
   equal(result , "ae, @casa dos manos!", "Replaces synonyms sucessfully");
