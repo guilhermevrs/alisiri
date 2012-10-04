@@ -151,7 +151,8 @@ function Alisiri()
 		$(data).find("keys").find("add").each(function(index, el){
 			var xmlEl = $(el);
 			var key = xmlEl.attr("key").toLowerCase();
-			var regOb = new RegExp('\\b'+key+'\\b');
+			var pattern = '(^'+key+'\s|^'+key+')|(\s'+key+')$|\s'+key+'\s'
+			var regOb = new RegExp(key,"gi");
 			if(regOb.test(minPhrase))
 			{
 				var newKeyEl = new KeyElement();
@@ -418,7 +419,7 @@ function AlisiriGui()
 		if ( !($.browser.msie || is_safari)) {
 			text = removeAccents(text);
 			console.log(text);
-			meSpeak.speak(text, { amplitude: 100, wordgap: 3, pitch: 50, speed: 175 });
+			//meSpeak.speak(text, { amplitude: 100, wordgap: 3, pitch: 50, speed: 175 });
 		}
 		else
 		{

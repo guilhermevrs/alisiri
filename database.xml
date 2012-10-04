@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <brain>
-	<initial>Sou galo</initial>
+	<initial>Olá, meu nome é Alisiri</initial>
 	<final>Tchau, ate mais</final>
 	<quit>
 		<add text="adeus"/>
 		<add text="ate logo"/>
+		<add text="tchau"/>
 	</quit>
 	<pre>
 		<add old="vc" new="voce"/>
@@ -20,7 +21,6 @@
 	<keys>
 		<add key="ola" decomp="*" order="1">
 			<reassemb text="Como vai você?"/>
-			<reassemb text="Guilherme gato"/>
 			<reassemb text="Olá marilene"/>
 		</add>
 	</keys>

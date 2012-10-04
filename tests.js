@@ -53,6 +53,9 @@ test( "Should get a array of possible keys in the right order", function(){
   listKey = siri.GetPossibleKeys("Isto é Chaves", '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Ola, como vai voce?</initial><final>Tchau, ate mais</final><keys><add key="Chaves" decomp="*" order="5"><reassemb text="r1"/><reassemb text="r2"/></add><add key="Chaves" decomp="* isto *" order="9"><reassemb text="r3"/><reassemb text="r4"/></add><add key="madruga" decomp="*" order="1"><reassemb text="r5"/><reassemb text="r6"/></add></keys></brain>');
   equal(2,listKey.length, "Returns the number of possible keys, desconsidering the decomp property");
   equal(9,listKey[0].order, "Returns the keys within the right order");
+  listKey = siri.GetPossibleKeys("Isto é @louco", '<?xml version="1.0" encoding="UTF-8"?><brain><initial>Ola, como vai voce?</initial><final>Tchau, ate mais</final><keys><add key="@louco" decomp="*" order="5"><reassemb text="r1"/><reassemb text="r2"/></add><add key="Chaves" decomp="* isto *" order="9"><reassemb text="r3"/><reassemb text="r4"/></add><add key="madruga" decomp="*" order="1"><reassemb text="r5"/><reassemb text="r6"/></add></keys></brain>');
+  equal(1,listKey.length, "Returns the number of possible keys, desconsidering the decomp property");
+  equal(5,listKey[0].order, "Returns the keys within the right order");
 });
 
 test( "Should create blocks of inside regex", function(){

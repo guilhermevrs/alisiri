@@ -1,11 +1,13 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="max-age=3600, PUBLIC">
 	<link rel="stylesheet" type="text/css" href="reset.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="style.css" media="all" />
 </head>
 <body>
 	<div id="distance"></div>
+	<div id="sidebar" class="sidebar"></div>
 	<div id="container" class="rounded-15">
 	</div>
 	<div id="sender-container">
@@ -15,15 +17,15 @@
 	<script type="text/javascript" src="jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="google-tts.js"></script>
 	<!--[if lt IE 8]><!-->
-<script type="text/javascript" src="mespeak/mespeak.js"></script>
+<!--<script type="text/javascript" src="../mespeak/mespeak.js"></script>-->
 <!--<![endif]-->
 	<script type="text/javascript" src="functions.js" charset="UTF-8"></script>
 	<script type="text/javascript">
 		var siriGui = new AlisiriGui();
 		var siri = new Alisiri();
 		if ( !($.browser.msie || is_safari)) {
-			meSpeak.loadConfig("mespeak/mespeak_config.json");
-			meSpeak.loadVoice("mespeak/voices/pt.json");
+			//meSpeak.loadConfig("../mespeak/mespeak_config.json");
+			//meSpeak.loadVoice("../mespeak/voices/pt.json");
 		}
 		else
 		{
