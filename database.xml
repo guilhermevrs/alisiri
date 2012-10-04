@@ -7,21 +7,26 @@
 		<add text="ate logo"/>
 		<add text="ate mais"/>
 		<add text="tchau"/>
+		<add text="abraco"/>
 		<add text="sair"/>
 	</quit>
 	<pre>
 		<add old="vc" new="voce"/>
 		<add old="q" new="que"/>
 		<add old="td" new="tudo"/>
+		<add old="pq" new="porque"/>
+		<add old="cmg" new="comigo"/>
 	</pre>
 	<pos>
 		<add old="@" new=""/>
 	</pos>
 	<syns>
-		<add syn="@casa" matches="casa barraco ape moradia"/>
 		<add syn="@ola" matches="ola oi"/>
 		<add syn="@voce" matches="voce tu"/>
 		<add syn="@se" matches="se talvez sera"/>
+		<add syn="@steve" matches="steve jobs"/>
+		<add syn="@gates" matches="gates bill"/>
+		<add syn="@ha" matches="ha haha he hehe rsrs kkk risada risadas"/>
 	</syns>
 	<keys>
 		<add key="@ola" decomp="*" order="3">
@@ -40,6 +45,9 @@
 			<reassemb text="Você tem certeza?"/>
 			<reassemb text="Você está certo ao respeito disso?"/>
 		</add>
+		<add key="@ha" decomp="*" order="1">
+			<reassemb text="Como isso pode ser tão engraçado?"/>
+		</add>
 		<add key="ok" decomp="ok" order="1">
 			<reassemb text="OK!"/>
 		</add>
@@ -47,11 +55,105 @@
 			<reassemb text="Gostei do seu entusiasmo!"/>
 			<reassemb text="Você parece bem confiante sobre (2)!"/>
 		</add>
+		<add key="porque" decomp="* porque *" order="1">
+			<reassemb text="Por que sim!"/>
+		</add>
 		<add key="@se" decomp="* @se *" order="1">
 			<reassemb text="Você tem certeza que (2)?"/>
+		</add>
+		<add key="@voce" decomp="* @voce *" order="1">
+			<reassemb text="Não vamos falar sobre mim. Vamos falar sobre a Apple!"/>
 		</add>
 		<add key="futebol" decomp="*" order="2">
 			<reassemb text="Faz muito tempo que não assisto aos jogos de futebol."/>
 		</add>
+		
+		<!-- MACFAN TOPIC BEGIN -->
+		
+		<add key="@steve" decomp="* @steve *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+			<reassemb text="Assim que foi lançada, eu li a bibliografia do Steve Jobs. 7 vezes!"/>
+		</add>
+		
+		<add key="@gates" decomp="* gates *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		
+		<add key="apple" decomp="* apple *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		<add key="ipod" decomp="* ipod *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		<add key="iphone" decomp="* iphone *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		<add key="ipad" decomp="* ipad *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		<add key="imac" decomp="* imac *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		<add key="mac" decomp="* mac *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		<add key="macintosh" decomp="* macintosh *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		<add key="nano" decomp="* nano *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		<add key="macbook" decomp="* macbook *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		
+		<add key="notebook" decomp="* notebook *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		<add key="pc" decomp="* pc *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		
+		<add key="ios" decomp="* ios *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		<add key="macos" decomp="* macos *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		<add key="lion" decomp="* lion *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		<add key="leopard" decomp="* leopard *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		
+		
+		<add key="windows" decomp="* windows *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		<add key="linux" decomp="* linux *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		<add key="samsung" decomp="* samsung *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		<add key="nokia" decomp="* nokia *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		<add key="microsoft" decomp="* microsoft *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		<add key="google" decomp="* google *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		<add key="android" decomp="* android *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		<add key="galaxy" decomp="* galaxy *" order="4">
+			<reassemb text="Salve Steve Jobs!"/>
+		</add>
+		
+		
+		<!-- MACFAN TOPIC END -->
 	</keys>
 </brain>
