@@ -55,7 +55,6 @@ test( "Should get a array of possible keys in the right order", function(){
   equal(9,listKey[0].order, "Returns the keys within the right order");
 });
 
-
 test( "Should create blocks of inside regex", function(){
   var a1 = new Array('hug','hash','jock', '*');
   var a2 = new Array('hug','hash', '*', 'jock', '*');
@@ -190,6 +189,28 @@ test("Should replace synonyms", function(){
   equal(result , "@casa @casa @casa @casa @casa @casa @casa @casa @casa", "Replaces synonyms sucessfully");
   
 });
+
+test("Should replace get n-esim * content", function(){
+	var s = "This is a common mistake";
+	var d1 = "this *",
+		d2 = "* common mistake"
+		d3 = "this * common *";
+	var r1 = "is a common mistake"
+		r2 = "This is a"
+		r3 = "is a"
+		r4 = "mistake";
+	equal(r1, adjustReassemb(s,d1,1), "First pair working");
+	equal(r2, adjustReassemb(s,d2,1), "Second pair working");
+	equal(r3, adjustReassemb(s,d3,1), "Third pair working");
+	equal(r4, adjustReassemb(s,d3,2), "Third pair working");
+});
+
+test("Should get the right number in the parentesis", function(){
+	var t1 = getParentesisNumbers("This is a common (9) test in the middle")
+		t2 = getParentesisNumbers("This is a common (9) test in the (8) middle");
+	equal(9, t1[0], "Test in the middle working");
+	equal(8, t2[1], "Test in the middle working");
+})
 
 //************************************MODULE GUI
 module("GUI", {

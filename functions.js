@@ -71,7 +71,47 @@ function removeSpacesFromPunctuation(text)
 	text = text.replace(new RegExp(' :','gi'), ':');
 	return text;
 }
-
+function adjustReassemb(inputString, decomp, index)
+{
+	var j=0;
+	var str="";
+	var dec;
+	var ini, fim;
+	var splitTerms = new Array();
+	var splitD = decomp.split(" ");
+	for(var i=0; i<splitD.length; i++){
+		dec = splitD[i];
+		if(dec != "*"){
+			str+=" " + dec;
+		}
+		else
+		{
+			splitTerms[j]=str.trim();
+			str="";
+			j++;
+		}
+	}
+	if(str != "")
+		splitTerms[j]=str.trim();
+	if(splitTerms[index-1] == "")
+		ini = 0;
+	else
+		ini = inputString.toLowerCase().indexOf(splitTerms[index-1].toLowerCase()) + splitTerms[index-1].length;
+	if(index >= splitTerms.length)
+		fim = inputString.length;
+	else
+		fim = inputString.toLowerCase().indexOf(splitTerms[index].toLowerCase());
+	return inputString.substring(ini, fim).trim();
+}
+function getParentesisNumbers(string)
+{
+	var ret = string.match(new RegExp('\\b \\(\\d+\\) \\b', 'gi'));
+	if(ret != null)
+		for(var i=0;i<ret.length;i++){
+			ret[i] = parseInt(ret[i].trim().replace(new RegExp('^\\(|\\)$', 'gi'),''));
+		}
+	return ret;
+}
 //***************Fim de funções globais***********
 
 //********************Classes*********************
@@ -219,7 +259,14 @@ function Alisiri()
 
 	this.GetRandomReassemb = function(key){
 		var index = Math.floor((Math.random()*key.reassemb.length)+0);
-		return key.reassemb[index];
+		var ret = key.reassemb[index];
+		var allN = getParentesisNumbers(ret.text);
+		if(allN != null)
+		{
+			for(var i; i<allN.length; i++)
+				ret.text = adjustReassemb(ret.text,key.decomp,allN[i]);
+		}
+		return ret;
 	}
 	
 	this.PreReplace = function(userInput, data){
