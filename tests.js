@@ -58,17 +58,6 @@ test( "Should get a array of possible keys in the right order", function(){
   equal(5,listKey[0].order, "Returns the keys within the right order");
 });
 
-test( "Should create blocks of inside regex", function(){
-  var a1 = new Array('hug','hash','jock', '*');
-  var a2 = new Array('hug','hash', '*', 'jock', '*');
-  var a3 = new Array('hug','hash', '*', 'jock');
-  var a4 = new Array('hug','hash','jock');
-  equal('\\s\\b((\\w)*\\shug hash jock)|(\\shug hash jock)\\b',RecursiveRegEx(a1,0), "Should create the right block");
-  equal('\\s\\b((\\w)*\\shug hash)|(\\shug hash)\\b\\s\\b((\\w)*\\sjock)|(\\sjock)\\b',RecursiveRegEx(a2,0), "Should create the right block");
-  equal('\\s\\b((\\w)*\\shug hash)|(\\shug hash)\\b\\s\\b((\\w)*\\sjock)|(\\sjock)\\b$',RecursiveRegEx(a3,0), "Should create the right block");
-  equal('\\s\\b((\\w)*\\shug hash jock)|(\\shug hash jock)\\b$',RecursiveRegEx(a4,0), "Should create the right block");
-});
-
 test( "Should create some regex", function(){
   var p1 = "* this *",
 	  p2 = "this *",
@@ -76,10 +65,10 @@ test( "Should create some regex", function(){
 	  p4 = "* this is a test *",
 	  p5 = "* everyone has * tenis *"
   var d1 = "/\\bthis\\b/gi",
-	  d2 = "/^this/gi",
-	  d3 = "/this$/gi",
+	  d2 = "/\\b^this\\b/gi",
+	  d3 = "/\\bthis$\\b/gi",
 	  d4 = "/\\bthis is a test\\b/gi",
-	  d5 = "/\\beveryone has\\b\\s\\b((\\w)*\\stenis)|(\\stenis)\\b/gi";
+	  d5 = "/\\beveryone has\\b(\\s|\\w)*\\btenis\\b/gi";
   equal(siri.ConvertToRegExp(p1).toString(), d1, "First phrase successfully converted");
   equal(siri.ConvertToRegExp(p2).toString(), d2, "Second phrase successfully converted");
   equal(siri.ConvertToRegExp(p3).toString(), d3, "Third phrase successfully converted");

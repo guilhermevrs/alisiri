@@ -7,38 +7,53 @@ var is_safari = $.browser.webkit && !window.chrome;
 
 $(document).ready(function(){
 	$('#txt-sender').focus();
+	$(".sidebar").live("click", function(){ 
+		var objMain = $(this);
+		if(objMain.hasClass(".sidebarExpanded")){
+			objMain.animate({
+				width: "25px"
+			  }, 500 );
+			objMain.removeClass(".sidebarExpanded");
+		}
+		else{
+			objMain.animate({
+				width: "230px"
+			  }, 500 );
+			objMain.addClass(".sidebarExpanded");
+		}
+	});
 	siriGui.Hello();
 });
 
 //*****************Funções globais****************
 function RecursiveRegEx(array, init)
 {
-//\s\b((\w)*\s[AQUI])|(\s[AQUI])\b
-	var str = "\\s\\b((\\w)*\\s";
-	var replace = "";
+	var str = "\\b";
 	var recursive = false;
 	for(var i=init; i<array.length; i++){
 		if(array[i] != '*'){
 			if(i!=init)
-				replace += ' ';
-			replace += array[i];
+				str += ' ';
+			str += array[i];
 		}
 		else
 		{
 			if(i<array.length-1)
 			{
 				recursive = true;
-				str += replace + ')|(\\s' + replace + ')\\b';
+				str += '\\b(\\s|\\w)*'
 				str += RecursiveRegEx(array, i+1);
 			}
 		}
 	}
 	if(!recursive)
 	{
-		str += replace + ')|(\\s' + replace + ')\\b';
 		if(array[array.length-1] != '*')
 			str += '$';
+		str += '\\b';
 	}
+	if(str == "\\b\\b")
+		str = "";
 	return str;
 }
 
@@ -189,8 +204,8 @@ function Alisiri()
 		{
 			if(splitDecomp[0]!="*")
 			{
-				str="^";
-				for(i=0; i<splitDecomp.length-1; i++)
+				str="\\b^";
+				for(i=0; i<splitDecomp.length; i++)
 				{
 					dec = splitDecomp[i];
 					if(dec != '*')
@@ -201,9 +216,10 @@ function Alisiri()
 					}
 					else
 					{
-						str += '\\s';
+						str+="\\b";
 						if(i<splitDecomp.length-1)
 						{
+							str += "(\\s|\\w)*";
 							str += RecursiveRegEx(splitDecomp,i+1);
 						}
 					}
@@ -220,7 +236,7 @@ function Alisiri()
 							str += ' '
 						str += dec;
 						if(i==splitDecomp.length-1)
-							str = str + "$";
+							str = '\\b' + str + "$\\b";
 					}
 					else
 					{
@@ -230,7 +246,7 @@ function Alisiri()
 						}
 						else
 						{
-							str = "\\b" + str + "\\b" + RecursiveRegEx(splitDecomp,i+1);
+							str = "\\b" + str + "\\b(\\s|\\w)*" + RecursiveRegEx(splitDecomp,i+1);
 							break;
 						}
 					}
