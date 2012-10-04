@@ -14,12 +14,12 @@ body {
     float:left;
 }
 #intro-texto{
-	margin-top: 30px;
+	margin-top: 15px;
 	margin-bottom: 20px;
 }
 #container {
     text-align:left;
-    height:27.5em;
+    height:410px;
     width:720px;
     clear:left;
     background-color:#eaeaea;
