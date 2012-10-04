@@ -218,9 +218,11 @@ test("Should replace get n-esim * content", function(){
 
 test("Should get the right number in the parentesis", function(){
 	var t1 = getParentesisNumbers("This is a common (9) test in the middle")
-		t2 = getParentesisNumbers("This is a common (9) test in the (8) middle");
+		t2 = getParentesisNumbers("This is a common (9) test in the (8) middle (7)");
+		t3 = getParentesisNumbers("(1)");
 	equal(9, t1[0], "Test in the middle working");
-	equal(8, t2[1], "Test in the middle working");
+	equal(7, t2[2], "Test in the middle working");
+	equal(1, t3[0], "Test in the middle working");
 })
 
 //************************************MODULE GUI
