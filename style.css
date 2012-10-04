@@ -45,13 +45,25 @@ body {
 }
 #btn-sender {
 	height: 35px;
+}
+
+#btn-reset{
+	width: 177px;
+	float: left;
+	margin-top: 18px;
+	height: 35px;
+	font-size: 18px;
+}
+
+.botao{
 	border: solid 1px #6eb2f9;
 	background-color: #6eb2f9;
 	color: #ffffff;
 	vertical-align: top;
 	cursor: pointer;
 }
-#btn-sender:active {
+
+.botao :active {
 	background-color: #4F80B3;
 }
 

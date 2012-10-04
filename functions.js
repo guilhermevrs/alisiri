@@ -9,6 +9,11 @@ var scriptLoaded = false;
 
 $(document).ready(function(){
 	$('#txt-sender').focus();
+	$('#btn-reset').live("click", function(){
+		$("#container").empty();
+		siriGui.FirstTime = true;
+		siriGui.Hello();
+	});
 	$(".sidebar-toggle").live("click", function(){ 
 		var objMain = $(".sidebar");
 		if(objMain.hasClass(".sidebar-expanded")){
