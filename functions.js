@@ -284,6 +284,7 @@ function Alisiri()
 			userInput = userInput.replace(new RegExp('\\s' + oldValue + '\\s','gi'), ' ' + newValue + ' ');
 			userInput = userInput.replace(new RegExp('^' + oldValue + '\\s','gi'), newValue + ' ');
 			userInput = userInput.replace(new RegExp('\\s' + oldValue + '$','gi'), ' ' + newValue);
+			userInput = userInput.replace(new RegExp('^' + oldValue + '$','gi'), newValue);
 		});
 		userInput = removeSpacesFromPunctuation(userInput);
 		return userInput;
@@ -304,6 +305,7 @@ function Alisiri()
 				userInput = userInput.replace(new RegExp('\\s' + matchlist[i] + '\\s','gi'), ' ' + syn + ' ');
 				userInput = userInput.replace(new RegExp('^' + matchlist[i] + '\\s','gi'), syn + ' ');
 				userInput = userInput.replace(new RegExp('\\s' + matchlist[i] + '$','gi'), ' ' + syn);
+				userInput = userInput.replace(new RegExp('^' + matchlist[i] + '$','gi'), syn);
 			}
 		});
 		
@@ -400,7 +402,7 @@ function AlisiriGui()
 					if(listKey != null)
 					{
 						var reassemb = siri.GetRandomReassemb(listKey);
-						self.AddAlisiriText(reassemb.text);
+						self.AddAlisiriText(siri.PostProcess(reassemb.text));
 					}
 				}
 			});
