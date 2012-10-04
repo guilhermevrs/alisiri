@@ -119,13 +119,33 @@ function adjustReassemb(inputString, decomp, index)
 		fim = inputString.toLowerCase().indexOf(splitTerms[index].toLowerCase());
 	return inputString.substring(ini, fim).trim();
 }
-function getParentesisNumbers(string)
+/*function getParentesisNumbers(string)
 {
 	var ret = string.match(new RegExp('\\b \\(\\d+\\) \\b', 'gi'));
 	if(ret != null)
 		for(var i=0;i<ret.length;i++){
 			ret[i] = parseInt(ret[i].trim().replace(new RegExp('^\\(|\\)$', 'gi'),''));
 		}
+	return ret;
+}*/
+
+function getParentesisNumbers(string)
+{
+	var counter = 0;
+	var ret = new Array();
+	for(var i = 0; i < string.length; i++)
+	{
+		if(string[i] == "(")
+		{
+			ret[counter] = "";
+			while(string[i + 1] != ")" && i + 1 < string.length)
+			{
+				i++;
+				ret[counter] += string[i];
+			}
+			counter++;
+		}
+	}
 	return ret;
 }
 //***************Fim de funções globais***********
