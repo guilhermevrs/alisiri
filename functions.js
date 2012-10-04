@@ -18,16 +18,14 @@ $(document).ready(function(){
 		var objMain = $(".sidebar");
 		if(objMain.hasClass(".sidebar-expanded")){
 			objMain.animate({
-				width: "25px",
-				height: "175px"
+				width: "25px"
 			  }, 500 );
 			objMain.removeClass(".sidebar-expanded");
 			$(".sidebar-content").removeClass("sidebar-content-expand");
 		}
 		else{
 			objMain.animate({
-				width: "230px",
-				height: "250px"
+				width: "230px"
 			  }, 500 );
 			objMain.addClass(".sidebar-expanded");
 			$(".sidebar-content").addClass("sidebar-content-expand");
@@ -51,8 +49,8 @@ function loadSound()
 		meSpeak.loadVoice("mespeak/voices/pt.json");
 	}
 }
-
-function enableSound(enable){
+function enableSound(enable)
+{
 	use_sound = enable;
 	if(enable && !scriptLoaded)
 	{
@@ -93,8 +91,8 @@ function RecursiveRegEx(array, init)
 		str = "";
 	return str;
 }
-
-function removeAccents(text) {
+function removeAccents(text) 
+{
 text = text.replace(new RegExp('[ÁÀÂÃ]','gi'), 'a');
 text = text.replace(new RegExp('[ÉÈÊ]','gi'), 'e');
 text = text.replace(new RegExp('[ÍÌÎ]','gi'), 'i');
@@ -196,14 +194,15 @@ function Alisiri()
 {
 	this.connectToDatabase = function(callback) {
 		$.ajax({
+		  dataType: 'jsonp',
 		  type: "GET",
 		  url: database_url,
 		  success: function(result){
 			if(typeof callback === 'function') callback.call(this, result);
 		  },
 		  dataType: 'xml',
-		  error: function () {
-			alert("Ocorreu um erro inesperado durante o processamento.");
+		  error: function (err) {
+			alert("Ocorreu um erro inesperado durante o processamento.[ERROR]: " + err);
 		  }
 		});
 	},
@@ -508,7 +507,7 @@ function AlisiriGui()
 				catch(err)
 				{}
 				text = removeAccents(text);
-				meSpeak.speak(text, { amplitude: 100, wordgap: 3, pitch: 50, speed: 175 });
+				meSpeak.speak(text, { amplitude: 110, wordgap: 2, pitch: 60, speed: 140 });
 			}
 		}
 	}

@@ -4,6 +4,7 @@ html, body {
 body {
     text-align:center; /* Centralizar na horizontal no IE caso o site entre em Quirks mode */
 	background:white url('images/bgnoise.png') repeat;
+	font-family: Arial;
 }
 #distance {
     width:1px;
@@ -12,9 +13,11 @@ body {
     margin-bottom:-13.75em; /* Metade da altura do nosso box que ficará centralizado */
     float:left;
 }
+#intro-texto{
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
 #container {
-    margin:0 auto;
-    position:relative; /* Coloca o container frente ao elemento com o id distance */
     text-align:left;
     height:27.5em;
     width:720px;
@@ -27,8 +30,6 @@ body {
 	overflow-x: hidden;
 }
 #sender-container {
-	margin:0 auto;
-    position:relative; /* Coloca o container frente ao elemento com o id distance */
     text-align:left;
     height:20px;
     width:45em;
@@ -36,25 +37,39 @@ body {
 	margin-top: 20px;
 }
 #txt-sender {
-	width: 658px;
-	background-color:#eaeaea;
-    border:1px solid #cccccc;
-	height: 35px;
-	font-size: 18px;
-	padding-left: 5px;
+	width: 650px;
 }
 #btn-sender {
 	height: 35px;
 }
-
 #btn-reset{
 	width: 177px;
 	float: left;
 	margin-top: 18px;
 	height: 35px;
 	font-size: 18px;
-}
 
+}
+#txt-url{
+	width: 177px;
+	height: 35px;
+	float: left;
+	margin-top: 4px;
+}
+.center{
+	margin:0 auto;
+    position:relative; /* Coloca o container frente ao elemento com o id distance */
+}
+.margin-left-sidebar{
+	margin-left: 5px !important;
+}
+.caixaTexto{
+	background-color:#eaeaea;
+    border:1px solid #cccccc;
+	height: 35px;
+	font-size: 18px;
+	padding-left: 5px;
+}
 .botao{
 	border: solid 1px #6eb2f9;
 	background-color: #6eb2f9;
@@ -62,30 +77,28 @@ body {
 	vertical-align: top;
 	cursor: pointer;
 }
-
 .botao :active {
 	background-color: #4F80B3;
 }
-
 .sidebar{
 	height: 175px;
 	position: absolute;
 	width: 25px;
 	background-color: black;
+	margin-top: 87px;
+	background-color:#000;
+	border: solid 3px #6eb2f9;
 }
-
 .sidebar-toggle{
 	float: right;
+	cursor: pointer;
 }
-
 .sidebar-content{
 	display: none;
 }
-
 .sidebar-content-expand{
 	display: inline !important;
 }
-
 .rounded-15 {
 	-moz-border-radius: 15px;
 	border-radius: 15px;
@@ -105,7 +118,6 @@ body {
 	border-radius:10px;
 	margin-left:50px;
 }
-
 .user-text:after {
 	content:"";
 	position:absolute;
@@ -118,7 +130,6 @@ body {
     display:block; 
     width:0;
 }
-
 .alisiri-text {
 	text-align: right;
 	position:relative;
@@ -145,8 +156,8 @@ body {
     display: block; 
     width: 0;
 }
-
 .iPhoneCheckContainer
 {
-	margin-top: 18px !important;
+	margin-top: 40px !important;
+	margin-left: 5px !important;
 }
