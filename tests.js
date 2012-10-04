@@ -199,10 +199,10 @@ test("Should replace get n-esim * content", function(){
 		r2 = "This is a"
 		r3 = "is a"
 		r4 = "mistake";
-	equal(r1, adjustReassemb(s,d1,1), "First pair working");
-	equal(r2, adjustReassemb(s,d2,1), "Second pair working");
-	equal(r3, adjustReassemb(s,d3,1), "Third pair working");
-	equal(r4, adjustReassemb(s,d3,2), "Third pair working");
+	equal(r1, adjustReassemb(s,"(1)",d1,1), "First pair working");
+	equal(r2, adjustReassemb(s,"(1)",d2,1), "Second pair working");
+	equal(r3, adjustReassemb(s,"(1)",d3,1), "Third pair working");
+	equal(r4, adjustReassemb(s,"(2)",d3,2), "Forth pair working");
 });
 
 test("Should get the right number in the parentesis", function(){

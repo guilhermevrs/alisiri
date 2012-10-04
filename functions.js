@@ -11,13 +11,15 @@ $(document).ready(function(){
 		var objMain = $(this);
 		if(objMain.hasClass(".sidebarExpanded")){
 			objMain.animate({
-				width: "25px"
+				width: "25px",
+				height: "175px"
 			  }, 500 );
 			objMain.removeClass(".sidebarExpanded");
 		}
 		else{
 			objMain.animate({
-				width: "230px"
+				width: "230px",
+				height: "250px"
 			  }, 500 );
 			objMain.addClass(".sidebarExpanded");
 		}
@@ -87,11 +89,12 @@ function removeSpacesFromPunctuation(text)
 	text = text.replace(new RegExp(' :','gi'), ':');
 	return text;
 }
-function adjustReassemb(inputString, decomp, index)
+function adjustReassemb(inputString, reassembText, decomp, index)
 {
 	var j=0;
 	var str="";
 	var dec;
+	var replace;
 	var ini, fim;
 	var splitTerms = new Array();
 	var splitD = decomp.split(" ");
@@ -117,7 +120,10 @@ function adjustReassemb(inputString, decomp, index)
 		fim = inputString.length;
 	else
 		fim = inputString.toLowerCase().indexOf(splitTerms[index].toLowerCase());
-	return inputString.substring(ini, fim).trim();
+	replace = inputString.substring(ini, fim).trim();
+	while(reassembText.indexOf("("+index+")") != -1)
+		reassembText = reassembText.replace("("+index+")", replace);
+	return reassembText;
 }
 /*function getParentesisNumbers(string)
 {
@@ -298,12 +304,6 @@ function Alisiri()
 	this.GetRandomReassemb = function(key){
 		var index = Math.floor((Math.random()*key.reassemb.length)+0);
 		var ret = key.reassemb[index];
-		var allN = getParentesisNumbers(ret.text);
-		if(allN != null)
-		{
-			for(var i; i<allN.length; i++)
-				ret.text = adjustReassemb(ret.text,key.decomp,allN[i]);
-		}
 		return ret;
 	}
 	
@@ -438,6 +438,14 @@ function AlisiriGui()
 					if(listKey != null)
 					{
 						var reassemb = siri.GetRandomReassemb(listKey);
+						var allN = getParentesisNumbers(reassemb.text);
+						if(allN != null)
+						{
+							for(var j=0; j<allN.length; j++)
+							{
+								reassemb.text = adjustReassemb(userInput, reassemb.text,key.decomp,allN[j]);
+							}
+						}
 						self.AddAlisiriText(siri.PostProcess(reassemb.text));
 					}
 				}
