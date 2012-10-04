@@ -42,13 +42,6 @@ $(document).ready(function(){
 });
 
 //*****************Funções globais****************
-function loadSound()
-{
-	if ( !($.browser.msie || is_safari)) {
-		meSpeak.loadConfig("mespeak/mespeak_config.json");
-		meSpeak.loadVoice("mespeak/voices/pt.json");
-	}
-}
 function enableSound(enable)
 {
 	use_sound = enable;
@@ -56,9 +49,8 @@ function enableSound(enable)
 	{
 		scriptLoaded = true;
 		var element = document.createElement("script");
-		element.src = "mespeak/mespeak.js";
+		element.src = "/mespeak/mespeak.js";
 		document.body.appendChild(element);
-		//while(typeof(meSpeak) == 'undefined'))
 	}
 }
 function RecursiveRegEx(array, init)
@@ -501,8 +493,8 @@ function AlisiriGui()
 			if ( !($.browser.msie || is_safari)) {
 				try
 				{
-					meSpeak.loadConfig("mespeak/mespeak_config.json");
-					meSpeak.loadVoice("mespeak/voices/pt.json");
+					meSpeak.loadConfig("/mespeak/mespeak_config.json");
+					meSpeak.loadVoice("/mespeak/voices/pt.json");
 				}
 				catch(err)
 				{}
