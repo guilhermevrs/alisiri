@@ -222,9 +222,12 @@ function Alisiri()
 		return key.reassemb[index];
 	}
 	
-	this.PreReplace = function(userInput, data){
+	this.ProcessorReplace = function(userInput, data, mode){
+		if(mode != "pre" && mode !="pos")
+			return null;
+			
 		userInput = addSpacesToPunctuation(userInput);
-		$(data).find("pre").find("add").each(function(index, el){
+		$(data).find(mode).find("add").each(function(index, el){
 			var xmlEl = $(el);
 			var oldValue = xmlEl.attr("old").toLowerCase();
 			var newValue = xmlEl.attr("new").toLowerCase();
@@ -265,11 +268,20 @@ function Alisiri()
 		
 		userInput = addSpacesToPunctuation(userInput);
 		
-		userInput = this.PreReplace(userInput, data);
+		userInput = this.ProcessorReplace(userInput, data, "pre");
 		userInput = this.ReplaceSynonyms(userInput, data);
 		
 		userInput = removeSpacesFromPunctuation(userInput);
 		return userInput;
+	}
+	
+	this.PostProcess = function(inputText, data){
+		inputText = addSpacesToPunctuation(inputText);
+		
+		inputText = this.ProcessorReplace(inputText, data, "pos");
+		
+		inputText = removeSpacesFromPunctuation(inputText);
+		return inputText;
 	}
 	
 };
