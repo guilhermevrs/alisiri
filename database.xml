@@ -9,7 +9,8 @@
 	</quit>
 	<pre>
 		<add old="vc" new="voce"/>
-		<add old="v3" new="v4"/>
+		<add old="q" new="que"/>
+		<add old="td" new="tudo"/>
 	</pre>
 	<pos>
 		<add old="v1" new="v2"/>
@@ -17,11 +18,12 @@
 	</pos>
 	<syns>
 		<add syn="@casa" matches="casa barraco ape moradia"/>
+		<add syn="@ola" matches="ola oi"/>
 	</syns>
 	<keys>
-		<add key="ola" decomp="*" order="1">
+		<add key="@ola" decomp="*" order="1">
 			<reassemb text="Como vai você?"/>
-			<reassemb text="Olá marilene"/>
+			<reassemb text="Olá, tudo bem?"/>
 		</add>
 	</keys>
 </brain>
