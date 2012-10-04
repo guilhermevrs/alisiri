@@ -363,6 +363,7 @@ function AlisiriGui()
 	var self = this;
 	siri.connectToDatabase(function(data){
 		self.AddAlisiriText(siri.getInitialPhrase(data));
+		self.FirstTime = false;
 		});
 	}
 	
