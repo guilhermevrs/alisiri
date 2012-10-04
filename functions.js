@@ -461,6 +461,7 @@ function AlisiriGui()
 				if(siri.CheckIfIsQuitPhrase(userInput, data))
 				{
 					self.AddAlisiriText(siri.getFinalPhrase(data));
+					self.FirstTime = true;
 				}
 				else 
 				{
