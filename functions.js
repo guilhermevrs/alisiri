@@ -61,7 +61,12 @@ function RecursiveRegEx(array, init)
 		if(array[i] != '*'){
 			if(i!=init)
 				str += ' ';
-			str += array[i].replace("@", " @");
+			else
+			{
+				if(str.indexOf("@")>-1)
+					str = "";
+			}
+			str += array[i]
 		}
 		else
 		{
@@ -266,6 +271,11 @@ function Alisiri()
 					{
 						if(i>0)
 							str += ' ';
+						else
+						{
+							if(dec.indexOf("@")>-1)
+								str="^"
+						}
 						str += dec.replace("@", " @");
 					}
 					else
@@ -281,26 +291,32 @@ function Alisiri()
 			}
 			else
 			{
+				str = "\\b";
 				for(i=1; i<splitDecomp.length; i++)
 				{
 					dec = splitDecomp[i];
 					if(dec != '*')
 					{
 						if(i>1)
-							str += ' '
-						str += dec.replace("@", " @");
+							str += ' ';
+						else
+						{
+							if(dec.indexOf("@")>-1)
+								str="\\B";
+						}
+						str += dec;
 						if(i==splitDecomp.length-1)
-							str = '\\b' + str + "$\\b";
+							str = str + "$\\b";
 					}
 					else
 					{
 						if(i==splitDecomp.length-1)
 						{
-							str = "\\b" + str + '\\b';
+							str = str + '\\b';
 						}
 						else
 						{
-							str = "\\b" + str + "\\b(\\s|\\w)*" + RecursiveRegEx(splitDecomp,i+1);
+							str = str + "\\b(\\s|\\w)*" + RecursiveRegEx(splitDecomp,i+1);
 							break;
 						}
 					}

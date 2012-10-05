@@ -29,7 +29,7 @@
 		<add syn="@ha" matches="ha haha he hehe rsrs kkk risada risadas"/>
 	</syns>
 	<keys>
-		<add key="@ola" decomp="*" order="3">
+		<add key="@ola" decomp="* @ola *" order="3">
 			<reassemb text="Olá!"/>
 			<reassemb text="Oi, sobre o que você quer conversar?"/>
 			<reassemb text="Oi, vamos falar de coisa boa?"/>
