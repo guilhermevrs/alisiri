@@ -26,7 +26,7 @@
 		<add syn="@se" matches="se talvez sera"/>
 		<add syn="@steve" matches="steve jobs"/>
 		<add syn="@gates" matches="gates bill"/>
-		<add syn="@sansung" matches="sansung galaxy s3"/>
+		<add syn="@samsung" matches="samsung galaxy s3"/>
 		<add syn="@mac" matches="mac macintosh"/>
 		<add syn="@ha" matches="ha haha he hehe rsrs kkk risada risadas"/>
 	</syns>
@@ -64,7 +64,7 @@
 			<reassemb text="Por que sim!"/>
 		</add>
 		<add key="@se" decomp="*" order="1">
-			<reassemb text="Você tem certeza que (2)?"/>
+			<reassemb text="Você tem certeza?"/>
 		</add>
 		<add key="@voce" decomp="* @voce *" order="1">
 			<reassemb text="Não vamos falar sobre mim. Vamos falar sobre a Apple!"/>
@@ -116,14 +116,16 @@
 		</add>
 		
 		<add key="notebook" decomp="* notebook *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
+			<reassemb text="Notebook bom, é notebook vendido na apple store"/>
 		</add>
 		<add key="pc" decomp="* pc *" order="4">
 			<reassemb text="Não tenho muito o que falar sobre PCs. O Mac é simplesmente melhor."/>
+			<reassemb text="PC=PorCaria"/>
 		</add>
 		
 		<add key="apple" decomp="* apple *" order="4">
 			<reassemb text="O que seria da tecnologia hoje se a Apple nao existisse?"/>
+			<reassemb text="Como sera que é trabalhar na Apple?"/>
 		</add>
 		<add key="ios" decomp="* ios *" order="4">
 			<reassemb text="Você já instalou o novo iOS6? Os novos mapas são demais!!!"/>
@@ -134,28 +136,35 @@
 		
 		
 		<add key="windows" decomp="* windows *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
+			<reassemb text="O windows não serve nem para peso de papel"/>
+			<reassemb text="Só de falar em windows, meu estômago cibernético fica embrulhado"/>
 		</add>
 		<add key="linux" decomp="* linux *" order="4">
 			<reassemb text="Um dia instalei o linux no meu Macbook. Estou tentando passar da tela de login até agora..."/>
+			<reassemb text="linux se escreve parecido com lixo..."/>
 		</add>
 		<add key="samsung" decomp="* samsung *" order="4">
 			<reassemb text="Maldita Samsung, sempre copiando os produtos da Apple!"/>
+			<reassemb text="Por falar em Samsung, será que ela pagou o processo para a Apple?"/>
+			
 		</add>
 		<add key="nokia" decomp="* nokia *" order="4">
 			<reassemb text="Nokia? Nunca tinha ouvido esse nome...!"/>
 		</add>
 		<add key="microsoft" decomp="* microsoft *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
+			<reassemb text="Microsot?? Só de ouvir esse nome me dá azar!!"/>
 		</add>
 		<add key="google" decomp="* google *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
+			<reassemb text="O motor de busca do google é muito bom. Já o android...!"/>
+			<reassemb text="Eu até que gostava dos mapas da google. Mas os da Apple são muito melhores!"/>
 		</add>
 		<add key="android" decomp="* android *" order="4">
 			<reassemb text="A única vantagem do Android sobre o iOS é que ele já vem!"/>
+			<reassemb text="Vai querer me dizer que a interface do android é boa, agora?!"/>
 		</add>
 		<add key="galaxy" decomp="* galaxy *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
+			<reassemb text="Não quero falar sobre isso"/>
+			<reassemb text="Galaxy é feio para caramba!!"/>
 		</add>
 		
 		
