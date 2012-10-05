@@ -26,27 +26,32 @@
 		<add syn="@se" matches="se talvez sera"/>
 		<add syn="@steve" matches="steve jobs"/>
 		<add syn="@gates" matches="gates bill"/>
+		<add syn="@sansung" matches="sansung galaxy s3"/>
+		<add syn="@mac" matches="mac macintosh"/>
 		<add syn="@ha" matches="ha haha he hehe rsrs kkk risada risadas"/>
 	</syns>
 	<keys>
-		<add key="@ola" decomp="* @ola *" order="3">
+		<add key="@ola" decomp="*" order="3">
 			<reassemb text="Olá!"/>
-			<reassemb text="Oi, sobre o que você quer conversar?"/>
+			<reassemb text="Oi, você já viu o novo iPhone 5?"/>
 			<reassemb text="Oi, vamos falar de coisa boa?"/>
 		</add>
-		<add key="tudo" decomp="*" order="1">
+		<add key="tudo" decomp="tudo *" order="1">
 			<reassemb text="tudo (1)!"/>
 		</add>
 		<add key="sim" decomp="*" order="1">
 			<reassemb text="Você tem certeza?"/>
 			<reassemb text="Você está certo ao respeito disso?"/>
+<reassemb text="óóóóókey"/>
 		</add>
 		<add key="nao" decomp="*" order="1">
 			<reassemb text="Você tem certeza?"/>
 			<reassemb text="Você está certo ao respeito disso?"/>
+			<reassemb text="óóóóókey"/>
 		</add>
 		<add key="@ha" decomp="*" order="1">
 			<reassemb text="Como isso pode ser tão engraçado?"/>
+			<reassemb text="Nem é tão engraçado assim."/>
 		</add>
 		<add key="ok" decomp="ok" order="1">
 			<reassemb text="OK!"/>
@@ -55,17 +60,18 @@
 			<reassemb text="Gostei do seu entusiasmo!"/>
 			<reassemb text="Você parece bem confiante sobre (2)!"/>
 		</add>
-		<add key="porque" decomp="* porque *" order="1">
+		<add key="porque" decomp="*" order="1">
 			<reassemb text="Por que sim!"/>
 		</add>
-		<add key="@se" decomp="* @se *" order="1">
+		<add key="@se" decomp="*" order="1">
 			<reassemb text="Você tem certeza que (2)?"/>
 		</add>
-		<add key="@voce" decomp="*" order="1">
+		<add key="@voce" decomp="* @voce *" order="1">
 			<reassemb text="Não vamos falar sobre mim. Vamos falar sobre a Apple!"/>
+			<reassemb text="Não vamos falar sobre mim. Vamos falar da teckpix, digo, Apple!"/>
 		</add>
 		<add key="futebol" decomp="*" order="2">
-			<reassemb text="Faz muito tempo que não assisto aos jogos de futebol."/>
+			<reassemb text="Faz muito tempo que não assisto aos jogos de futebol. Mas ouvi dizer que tem um app para iPhone MUITO bom!!"/>
 		</add>
 		
 		<!-- MACFAN TOPIC BEGIN -->
@@ -73,57 +79,56 @@
 		<add key="@steve" decomp="* @steve *" order="4">
 			<reassemb text="Salve Steve Jobs!"/>
 			<reassemb text="Assim que foi lançada, eu li a bibliografia do Steve Jobs. 7 vezes!"/>
+			<reassemb text="O que seria da tecnologia hoje sem o legado de Steve Jobs?"/>
+			<reassemb text="Só de falar no Steve, já me cai uma lágrima do olho."/>
 		</add>
 		
-		<add key="@gates" decomp="* gates *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
+		<add key="@gates" decomp="* @gates *" order="4">
+			<reassemb text="'Para criar um novo padrão, é necessário criar algo realmente novo, algo que capture a imaginação das pessoas. De todas as máquinas que já vi, o Macintosh é a única que se encaixa nesse padrão.'  - Bill Gates, 1984"/>
+			<reassemb text="'Quer mesmo falar sobre aquele pilantra?"/>
+			<reassemb text="Se"/>
 		</add>
 		
-		<add key="apple" decomp="* apple *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
-		</add>
 		<add key="ipod" decomp="* ipod *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
+			<reassemb text="Isso me lembra que tenho que carregar a bateria do meu iPod!"/>
+			<reassemb text="Você sabia que se nao fosse o iPod, você provavelmente estaria carregando um walkman até hoje?"/>
+			<reassemb text="Você já instalou o novo iOS6? Os novos mapas são demais!!!"/>
 		</add>
 		<add key="iphone" decomp="* iphone *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
+			<reassemb text="Nunca se pode ter certeza de nada. A única coisa que podemos afirmar é que o iPhone 6 é muito melhor que o Galaxy SIII"/>
+			<reassemb text="Você já instalou o novo iOS6? Os novos mapas são demais!!!"/>
 		</add>
 		<add key="ipad" decomp="* ipad *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
+			<reassemb text="Você já instalou o novo iOS6? Os novos mapas são demais!!!"/>
+			
 		</add>
 		<add key="imac" decomp="* imac *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
+			<reassemb text="Minha vida mudou com o iMac! Agora eu uso a coleção da adobe com estilo!"/>
 		</add>
-		<add key="mac" decomp="* mac *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
-		</add>
-		<add key="macintosh" decomp="* macintosh *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
+		<add key="@mac" decomp="* @mac *" order="4">
+			<reassemb text="Ainda me lembro quando comprei meu primeiro Macintosh. A voz dele era parecida com a minha!!"/>
 		</add>
 		<add key="nano" decomp="* nano *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
+			<reassemb text="Você me lembrou agora! Perdi meu iPod nano!"/>
 		</add>
 		<add key="macbook" decomp="* macbook *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
+			<reassemb text="Eu levo meu macbook pra onde vou! O problema é o risco de voltar pra casa sem ele..."/>
 		</add>
 		
 		<add key="notebook" decomp="* notebook *" order="4">
 			<reassemb text="Salve Steve Jobs!"/>
 		</add>
 		<add key="pc" decomp="* pc *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
+			<reassemb text="Não tenho muito o que falar sobre PCs. O Mac é simplesmente melhor."/>
 		</add>
 		
+		<add key="apple" decomp="* apple *" order="4">
+			<reassemb text="O que seria da tecnologia hoje se a Apple nao existisse?"/>
+		</add>
 		<add key="ios" decomp="* ios *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
+			<reassemb text="Você já instalou o novo iOS6? Os novos mapas são demais!!!"/>
 		</add>
 		<add key="macos" decomp="* macos *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
-		</add>
-		<add key="lion" decomp="* lion *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
-		</add>
-		<add key="leopard" decomp="* leopard *" order="4">
 			<reassemb text="Salve Steve Jobs!"/>
 		</add>
 		
@@ -132,13 +137,13 @@
 			<reassemb text="Salve Steve Jobs!"/>
 		</add>
 		<add key="linux" decomp="* linux *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
+			<reassemb text="Um dia instalei o linux no meu Macbook. Estou tentando passar da tela de login até agora..."/>
 		</add>
 		<add key="samsung" decomp="* samsung *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
+			<reassemb text="Maldita Samsung, sempre copiando os produtos da Apple!"/>
 		</add>
 		<add key="nokia" decomp="* nokia *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
+			<reassemb text="Nokia? Nunca tinha ouvido esse nome...!"/>
 		</add>
 		<add key="microsoft" decomp="* microsoft *" order="4">
 			<reassemb text="Salve Steve Jobs!"/>
@@ -147,7 +152,7 @@
 			<reassemb text="Salve Steve Jobs!"/>
 		</add>
 		<add key="android" decomp="* android *" order="4">
-			<reassemb text="Salve Steve Jobs!"/>
+			<reassemb text="A única vantagem do Android sobre o iOS é que ele já vem!"/>
 		</add>
 		<add key="galaxy" decomp="* galaxy *" order="4">
 			<reassemb text="Salve Steve Jobs!"/>
@@ -157,3 +162,4 @@
 		<!-- MACFAN TOPIC END -->
 	</keys>
 </brain>
+
