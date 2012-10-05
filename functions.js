@@ -219,6 +219,8 @@ function Alisiri()
 			var xmlEl = $(el);
 			var key = xmlEl.attr("key").toLowerCase();
 			var pattern = '\\b'+key+'\\b';
+			if(key.indexOf("@")!=-1)
+				pattern = '^'+key+'\\b|\\W'+key+'$|\\b\\W'+key+'\\W\\b'
 			var regOb = new RegExp(pattern,"gi");
 			if(regOb.test(minPhrase))
 			{

@@ -61,7 +61,7 @@
 		<add key="@se" decomp="* @se *" order="1">
 			<reassemb text="Você tem certeza que (2)?"/>
 		</add>
-		<add key="@voce" decomp="* @voce *" order="1">
+		<add key="@voce" decomp="*" order="1">
 			<reassemb text="Não vamos falar sobre mim. Vamos falar sobre a Apple!"/>
 		</add>
 		<add key="futebol" decomp="*" order="2">
