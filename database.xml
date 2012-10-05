@@ -34,8 +34,8 @@
 			<reassemb text="Oi, sobre o que você quer conversar?"/>
 			<reassemb text="Oi, vamos falar de coisa boa?"/>
 		</add>
-		<add key="tudo" decomp="* tudo *" order="1">
-			<reassemb text="tudo (2)!"/>
+		<add key="tudo" decomp="*" order="1">
+			<reassemb text="tudo (1)!"/>
 		</add>
 		<add key="sim" decomp="*" order="1">
 			<reassemb text="Você tem certeza?"/>

@@ -218,8 +218,8 @@ function Alisiri()
 		$(data).find("keys").find("add").each(function(index, el){
 			var xmlEl = $(el);
 			var key = xmlEl.attr("key").toLowerCase();
-			var pattern = '(^'+key+'\s|^'+key+')|(\s'+key+')$|\s'+key+'\s'
-			var regOb = new RegExp(key,"gi");
+			var pattern = '\\b'+key+'\\b';
+			var regOb = new RegExp(pattern,"gi");
 			if(regOb.test(minPhrase))
 			{
 				var newKeyEl = new KeyElement();
